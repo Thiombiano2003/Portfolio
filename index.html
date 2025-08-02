@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Spatial Tech | Portfolio Géomatique</title>
+  <link rel="shortcut icon" href="./images/WhatsApp Image 2025-07-03 à 12.48.01_c6ba8855.jpg" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* Variables de couleur */
@@ -14,6 +15,7 @@
       --light: #ecf0f1;
       --dark: #2c3e50;
       --overlay: rgba(26, 82, 118, 0.85);
+      --success: #27ae60;
     }
     
     /* Réinitialisation et styles de base */
@@ -27,9 +29,10 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
       color: #333;
-      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+      background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
                   url('https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1794&q=80') center/cover fixed no-repeat;
       background-attachment: fixed;
+      overflow-x: hidden;
     }
     
     /* En-tête et navigation */
@@ -39,11 +42,12 @@
       padding: 1rem 2rem;
       position: sticky;
       top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.5);
       display: flex;
       flex-direction: column;
       align-items: center;
+      transition: all 0.3s ease;
     }
     
     .header-content {
@@ -58,6 +62,7 @@
       font-size: 1.8rem;
       margin-bottom: 0.2rem;
       text-align: center;
+      font-weight: 700;
     }
     
     header h3 {
@@ -83,23 +88,61 @@
       border-radius: 4px;
       transition: all 0.3s ease;
       font-weight: 500;
+      position: relative;
     }
     
-    nav a:hover, nav a:focus {
+    nav a:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
       background: var(--accent);
-      color: var(--dark);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+    
+    nav a:hover, nav a:focus, nav a.active {
+      color: var(--accent);
+    }
+    
+    nav a:hover:after, nav a.active:after {
+      width: 80%;
+    }
+    
+    /* Bouton menu mobile */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      z-index: 1010;
     }
     
     /* Sections */
     section {
-      background: rgba(255, 255, 255, 0.92);
-      border-radius: 8px;
-      padding: 2rem;
-      margin: 2rem auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      padding: 2.5rem;
+      margin: 2.5rem auto;
       max-width: 1200px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
       position: relative;
       overflow: hidden;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    
+    section.active {
+      transform: translateY(0);
+      opacity: 1;
     }
     
     section:before {
@@ -107,213 +150,263 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 5px;
+      width: 6px;
       height: 100%;
       background: var(--primary);
+      z-index: 1;
     }
     
     section h2 {
       color: var(--primary);
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--accent);
-      font-size: 2rem;
+      margin-bottom: 1.8rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 3px solid var(--accent);
+      font-size: 2.2rem;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
     
     /* Accueil */
     #accueil {
       text-align: center;
-      padding: 4rem 2rem;
-      margin-top: 3rem;
+      padding: 5rem 2rem;
+      margin-top: 4rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 70vh;
+      min-height: 90vh;
+      background: linear-gradient(rgba(26, 82, 118, 0.7), rgba(40, 116, 166, 0.7)), 
+                  url('https://images.unsplash.com/photo-1564053489984-317bbd824340?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1796&q=80') center/cover;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    
+    #accueil:before {
+      display: none;
     }
     
     #accueil h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: var(--primary);
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      color: white;
       border: none;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
     
     #accueil p {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       font-weight: bold;
-      color: var(--secondary);
+      color: var(--light);
       max-width: 800px;
-      margin: 0 auto;
+      margin: 0 auto 3rem;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+    
+    .hero-btns {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .btn {
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn-primary {
+      background: var(--accent);
+      color: var(--dark);
+      box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+    }
+    
+    .btn-primary:hover {
+      background: #e67e22;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-3px);
     }
     
     /* Formation et compétences */
     ul, ol {
-      padding-left: 2rem;
-      margin: 1rem 0;
+      padding-left: 2.2rem;
+      margin: 1.2rem 0;
     }
     
     li {
-      margin-bottom: 0.8rem;
+      margin-bottom: 1rem;
       position: relative;
+      padding-left: 1.5rem;
     }
     
     li:before {
       content: "•";
       color: var(--accent);
       font-weight: bold;
+      font-size: 1.5rem;
       position: absolute;
-      left: -1rem;
+      left: 0;
+      top: -0.3rem;
     }
     
     /* Projets */
     .projects-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 25px;
-      margin-top: 20px;
+      gap: 30px;
+      margin-top: 25px;
     }
     
     .project {
-      background: rgba(236, 240, 241, 0.7);
-      padding: 1.5rem;
-      border-radius: 8px;
-      border-left: 3px solid var(--accent);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: rgba(236, 240, 241, 0.8);
+      padding: 1.8rem;
+      border-radius: 10px;
+      border-left: 4px solid var(--accent);
+      transition: all 0.4s ease;
       height: 100%;
       display: flex;
       flex-direction: column;
+      position: relative;
+      overflow: hidden;
     }
     
     .project:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
     }
     
     .project h3 {
       color: var(--primary);
-      font-size: 1.3rem;
-      margin-bottom: 0.8rem;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      z-index: 2;
     }
     
     .project-image {
       width: 100%;
-      height: 200px;
-      border-radius: 6px;
-      margin-bottom: 15px;
+      height: 220px;
+      border-radius: 8px;
+      margin-bottom: 18px;
       object-fit: cover;
       border: 1px solid #ddd;
       background-color: #f5f5f5;
+      transition: transform 0.5s ease;
+      z-index: 2;
+    }
+    
+    .project:hover .project-image {
+      transform: scale(1.05);
     }
     
     .project p {
       flex-grow: 1;
+      z-index: 2;
+    }
+    
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 1rem;
+      z-index: 2;
+    }
+    
+    .tag {
+      background: var(--primary);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+    
+    .project-bg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 8rem;
+      color: rgba(26, 82, 118, 0.05);
+      z-index: 1;
     }
     
     .more-projects {
       text-align: center;
-      margin-top: 30px;
-      font-size: 1.2rem;
+      margin-top: 40px;
+      font-size: 1.3rem;
       color: var(--secondary);
-      font-weight: 500;
-    }
-    
-    /* Galerie d'images */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 15px;
-      margin-top: 25px;
-    }
-    
-    .gallery-item {
-      border-radius: 8px;
-      overflow: hidden;
-      position: relative;
-      height: 200px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-    
-    .gallery-item:hover {
-      transform: scale(1.03);
-    }
-    
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    
-    .gallery-item:hover img {
-      transform: scale(1.1);
-    }
-    
-    .gallery-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0,0,0,0.7);
-      color: white;
-      padding: 10px;
-      font-size: 0.9rem;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
-    
-    .gallery-item:hover .gallery-caption {
-      transform: translateY(0);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
     
     /* Contact */
     #contact {
       text-align: center;
-      padding: 3rem 2rem;
+      padding: 3.5rem 2.5rem;
     }
     
     .contact-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin-top: 20px;
+      gap: 40px;
+      margin-top: 30px;
     }
     
     .contact-info {
-      background: rgba(236, 240, 241, 0.7);
-      padding: 2rem;
-      border-radius: 8px;
-      border-left: 3px solid var(--accent);
+      background: rgba(236, 240, 241, 0.8);
+      padding: 2.5rem;
+      border-radius: 10px;
+      border-left: 4px solid var(--accent);
       text-align: left;
+      position: relative;
+      overflow: hidden;
     }
     
     .contact-info h3 {
       color: var(--primary);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.8rem;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      font-size: 1.5rem;
     }
     
     .contact-info p {
-      margin: 1.2rem 0;
-      font-size: 1.1rem;
+      margin: 1.5rem 0;
+      font-size: 1.15rem;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
     
     .contact-info a {
       color: var(--secondary);
       text-decoration: none;
-      transition: color 0.3s;
+      transition: all 0.3s;
     }
     
     .contact-info a:hover {
@@ -322,51 +415,57 @@
     }
     
     .contact-form {
-      background: rgba(236, 240, 241, 0.7);
-      padding: 2rem;
-      border-radius: 8px;
-      border-left: 3px solid var(--accent);
+      background: rgba(236, 240, 241, 0.8);
+      padding: 2.5rem;
+      border-radius: 10px;
+      border-left: 4px solid var(--accent);
       text-align: left;
+      position: relative;
+      overflow: hidden;
     }
     
     .contact-form h3 {
       color: var(--primary);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.8rem;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      font-size: 1.5rem;
     }
     
     .form-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.8rem;
+      position: relative;
     }
     
     .form-group label {
       display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
+      margin-bottom: 0.6rem;
+      font-weight: 600;
       color: var(--primary);
+      font-size: 1.05rem;
     }
     
     .form-group input,
     .form-group textarea {
       width: 100%;
-      padding: 10px;
+      padding: 12px 15px;
       border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 1rem;
-      transition: border-color 0.3s;
+      border-radius: 6px;
+      font-size: 1.05rem;
+      transition: all 0.3s;
+      font-family: inherit;
     }
     
     .form-group input:focus,
     .form-group textarea:focus {
       outline: none;
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.2);
+      box-shadow: 0 0 0 4px rgba(243, 156, 18, 0.2);
     }
     
     .form-group textarea {
-      height: 150px;
+      height: 160px;
       resize: vertical;
     }
     
@@ -374,45 +473,79 @@
       background: var(--primary);
       color: white;
       border: none;
-      padding: 12px 25px;
-      border-radius: 4px;
-      font-size: 1rem;
+      padding: 14px 30px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
+      transition: all 0.3s;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(26, 82, 118, 0.3);
     }
     
     .submit-btn:hover {
       background: var(--secondary);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(26, 82, 118, 0.4);
     }
     
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
-      margin-top: 1.5rem;
+      gap: 1.8rem;
+      margin-top: 2rem;
     }
     
     .social-icons a {
       display: inline-block;
-      width: 50px;
-      height: 50px;
+      width: 55px;
+      height: 55px;
       background: var(--primary);
       color: white;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
     
     .social-icons a:hover {
       background: var(--accent);
-      transform: translateY(-3px);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    }
+    
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 25px;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      z-index: 2000;
+      opacity: 0;
+      transform: translateX(100px);
+      transition: all 0.5s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    
+    .notification.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .notification.success {
+      background: var(--success);
+    }
+    
+    .notification.error {
+      background: #e74c3c;
     }
     
     /* Pied de page */
@@ -420,32 +553,105 @@
       background: var(--overlay);
       color: white;
       text-align: center;
-      padding: 1.5rem;
-      margin-top: 2rem;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--accent);
+      color: var(--dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    
+    .back-to-top.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .back-to-top:hover {
+      background: #e67e22;
+      transform: translateY(-5px);
     }
     
     /* Responsive */
+    @media (max-width: 1000px) {
+      .projects-container {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      }
+      
+      .contact-container {
+        gap: 30px;
+      }
+    }
+    
     @media (max-width: 768px) {
       section {
-        padding: 1.5rem;
-        margin: 1.5rem;
+        padding: 2rem;
+        margin: 2rem 1.5rem;
       }
       
       header {
         padding: 1rem;
       }
       
+      #accueil h2 {
+        font-size: 2.5rem;
+      }
+      
+      #accueil p {
+        font-size: 1.5rem;
+      }
+      
+      .projects-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero-btns {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+    }
+    
+    @media (max-width: 600px) {
       nav ul {
-        gap: 0.5rem;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding-top: 1rem;
       }
       
-      nav a {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.9rem;
+      nav ul.active {
+        display: flex;
       }
       
-      #accueil {
-        padding: 2.5rem 1rem;
+      .mobile-menu-btn {
+        display: block;
       }
       
       #accueil h2 {
@@ -453,57 +659,75 @@
       }
       
       #accueil p {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
       }
       
-      .projects-container {
-        grid-template-columns: 1fr;
+      section h2 {
+        font-size: 1.8rem;
       }
       
-      .gallery {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      .project h3 {
+        font-size: 1.3rem;
       }
       
-      .contact-container {
-        grid-template-columns: 1fr;
+      .project-image {
+        height: 200px;
+      }
+      
+      .contact-info, .contact-form {
+        padding: 1.8rem;
+      }
+      
+      .social-icons a {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
       }
     }
     
-    /* Animation des sections */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+    @media (max-width: 480px) {
+      #accueil {
+        padding: 3rem 1.5rem;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      
+      #accueil h2 {
+        font-size: 1.8rem;
+      }
+      
+      #accueil p {
+        font-size: 1.1rem;
+      }
+      
+      section {
+        padding: 1.8rem 1.5rem;
+      }
+      
+      section h2 {
+        font-size: 1.6rem;
+      }
+      
+      .project {
+        padding: 1.5rem;
+      }
+      
+      .project-image {
+        height: 180px;
       }
     }
-    
-    section {
-      animation: fadeInUp 0.8s ease-out forwards;
-      opacity: 0;
-    }
-    
-    section:nth-child(2) { animation-delay: 0.1s; }
-    section:nth-child(3) { animation-delay: 0.2s; }
-    section:nth-child(4) { animation-delay: 0.3s; }
-    section:nth-child(5) { animation-delay: 0.4s; }
-    section:nth-child(6) { animation-delay: 0.5s; }
-    section:nth-child(7) { animation-delay: 0.6s; }
-    section:nth-child(8) { animation-delay: 0.7s; }
   </style>
 </head>
 <body>
 
   <header>
     <div class="header-content">
+      <button class="mobile-menu-btn" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
       <h1>Thiombiano Serges Honoré</h1>
       <h3>Spatial Tech</h3>
       <nav>
-        <ul>
-          <li><a href="#accueil">Accueil</a></li>
+        <ul id="navMenu">
+          <li><a href="#accueil" class="active">Accueil</a></li>
           <li><a href="#formation">Formation</a></li>
           <li><a href="#a-propos">À propos</a></li>
           <li><a href="#competences">Compétences</a></li>
@@ -518,6 +742,10 @@
   <section id="accueil">
     <h2><i class="fas fa-globe-africa"></i> Bienvenue sur mon portfolio</h2>
     <p>« Géomatique & Intelligence spatiale au service du développement »</p>
+    <div class="hero-btns">
+      <a href="#projets" class="btn btn-primary"><i class="fas fa-project-diagram"></i> Voir mes projets</a>
+      <a href="#contact" class="btn btn-secondary"><i class="fas fa-envelope"></i> Me contacter</a>
+    </div>
   </section>
   
   <section id="formation">
@@ -570,51 +798,99 @@
     
     <div class="projects-container">
       <div class="project">
+        <div class="project-bg"><i class="fas fa-map"></i></div>
         <h3><i class="fas fa-map"></i> Cartographie de Ouagadougou</h3>
-        <img src="./images/Classif.PNG" alt="Cartographie de l'occupation du sol" class="project-image">
+        <img src="./images/Classif.PNG" alt="Cartographie de Ouagadougou" class="project-image">
         <p>Analyse de l'évolution de l'occupation du sol à Ouagadougou à l'aide d'images satellites Landsat avec classification supervisée et algorithme Random Forest.</p>
+        <div class="project-tags">
+          <span class="tag">QGIS</span>
+          <span class="tag">Landsat</span>
+          <span class="tag">Classification</span>
+        </div>
       </div>
       
       <div class="project">
-        <h3><i class="fas fa-seedling"></i> Identification des zone à risque</h3>
-        <img src="./images/Carte_tampon.PNG" alt="Zone Carte_tampon" class="project-image">
-        <p>Évaluation des dangers routier afin de prendre toute les precaution des de tel zone</p>
+        <div class="project-bg"><i class="fas fa-exclamation-triangle"></i></div>
+        <h3><i class="fas fa-seedling"></i> Identification des zones à risque</h3>
+        <img src="./images/Carte_tampon.PNG" alt="Identification des zones dangereuses" class="project-image">
+        <p>Évaluation des dangers routiers afin de prendre toutes les précautions nécessaires dans ces zones critiques.</p>
+        <div class="project-tags">
+          <span class="tag">Analyse Spatiale</span>
+          <span class="tag">Cartographie</span>
+          <span class="tag">Sécurité</span>
+        </div>
       </div>
       
       <div class="project">
+        <div class="project-bg"><i class="fas fa-cloud-rain"></i></div>
         <h3><i class="fas fa-cloud-sun-rain"></i> Données climatiques GLDAS</h3>
-        <img src="./images/carte pluviometrique.PNG" alt="Données climatiques" class="project-image">
+        <img src="./images/carte pluviometrique.PNG" class="project-image">
         <p>Extraction et traitement de données climatiques spatialisées GLDAS pour calculer les cumuls pluviométriques sur les provinces du Burkina Faso.</p>
+        <div class="project-tags">
+          <span class="tag">Climatologie</span>
+          <span class="tag">GLDAS</span>
+          <span class="tag">Python</span>
+        </div>
       </div>
       
       <div class="project">
+        <div class="project-bg"><i class="fas fa-database"></i></div>
         <h3><i class="fas fa-database"></i> Base de données foncière</h3>
-        <img src="./images/Capture1.PNG" alt="Modélisation de base de données" class="project-image">
+        <img src="./images/Capture1.PNG" alt="Base de données foncière" class="project-image">
         <p>Réalisation d'un modèle conceptuel et logique pour structurer les données foncières d'une commune.</p>
+        <div class="project-tags">
+          <span class="tag">Base de données</span>
+          <span class="tag">Foncier</span>
+          <span class="tag">PostGIS</span>
+        </div>
       </div>
       
       <div class="project">
+        <div class="project-bg"><i class="fas fa-water"></i></div>
         <h3><i class="fas fa-water"></i> Détection d'inondations</h3>
-        <img src="./images/GEE.PNG" alt="Zone inondée" class="project-image">
+        <img src="./images/GEE.PNG" alt="Détection d'inondations" class="project-image">
         <p>Analyse géospatiale avec images Sentinel pour identifier les zones inondées autour du pont de Hèrèdougou.</p>
+        <div class="project-tags">
+          <span class="tag">Télédétection</span>
+          <span class="tag">Sentinel</span>
+          <span class="tag">GEE</span>
+        </div>
       </div>
       
       <div class="project">
+        <div class="project-bg"><i class="fas fa-laptop-code"></i></div>
         <h3><i class="fas fa-laptop-code"></i> Site web vitrine</h3>
         <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Site web" class="project-image">
         <p>Mise en place d'un site vitrine pour BCEF ingenierie et informatique avec HTML, CSS et JavaScript.</p>
+        <div class="project-tags">
+          <span class="tag">Web</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
       </div>
       
       <div class="project">
+        <div class="project-bg"><i class="fas fa-chart-line"></i></div>
         <h3><i class="fas fa-satellite"></i> Analyse de Huff </h3>
-        <img src="./images/Carte1.PNG" alt="analyse de Huff" class="project-image">
-        <p> analyse spatial permettent d'identifier les provinces attractives et les disparités démographiques, utile pour les politiques publiques ou la recherche en géographie humaine.</p>
+        <img src="./images/Carte1.PNG" alt="Analyse de Huff" class="project-image">
+        <p>Analyse spatiale permettant d'identifier les provinces attractives et les disparités démographiques.</p>
+        <div class="project-tags">
+          <span class="tag">Analyse</span>
+          <span class="tag">Modélisation</span>
+          <span class="tag">Démographie</span>
+        </div>
       </div>
       
       <div class="project">
+        <div class="project-bg"><i class="fas fa-road"></i></div>
         <h3><i class="fas fa-road"></i> Planification d'infrastructures</h3>
         <img src="./images/pyqgis.PNG" alt="Planification d'infrastructures" class="project-image">
-        <p>Analyse spatiale pour optimiser l'aide humanitaire afin que tout burkinabè est accès à l'eau potable sur toute l'étendue du territoire.</p>
+        <p>Analyse spatiale pour optimiser l'aide humanitaire afin que tout burkinabè ait accès à l'eau potable.</p>
+        <div class="project-tags">
+          <span class="tag">Planification</span>
+          <span class="tag">Infrastructures</span>
+          <span class="tag">Humanitaire</span>
+        </div>
       </div>
     </div>
     
@@ -681,40 +957,75 @@
       <i class="fas fa-map-marker-alt"></i> Ouagadougou, Burkina Faso
     </p>
   </footer>
+  
+  <div class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+  
+  <div class="notification" id="notification"></div>
 
   <script>
+    // Menu mobile
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.getElementById('navMenu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Fermer le menu au clic sur un lien
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+    
     // Smooth scrolling pour la navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
         
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth'
+          });
+          
+          // Mise à jour de la navigation active
+          document.querySelectorAll('nav a').forEach(a => {
+            a.classList.remove('active');
+          });
+          this.classList.add('active');
+        }
       });
     });
     
-    // Animation des images au défilement
-    const galleryItems = document.querySelectorAll('.gallery-item, .project');
+    // Animation des sections au défilement
+    const sections = document.querySelectorAll('section');
     
-    const observer = new IntersectionObserver(entries => {
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.style.opacity = 1;
-          entry.target.style.transform = 'scale(1)';
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, {
+      threshold: 0.1
+    });
     
-    galleryItems.forEach(item => {
-      item.style.opacity = 0;
-      item.style.transform = 'scale(0.95)';
-      item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(item);
+    sections.forEach(section => {
+      observer.observe(section);
     });
     
     // Gestion du formulaire de contact
     const contactForm = document.getElementById('contactForm');
+    const notification = document.getElementById('notification');
+    
     if (contactForm) {
       contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -725,22 +1036,70 @@
         const subject = document.getElementById('subject').value;
         const message = document.getElementById('message').value;
         
-        // Création d'un objet avec les données
-        const formData = {
-          name,
-          email,
-          subject,
-          message
-        };
+        // Validation basique
+        if (!name || !email || !subject || !message) {
+          showNotification('Veuillez remplir tous les champs', 'error');
+          return;
+        }
         
-        // Ici, normalement vous enverriez ces données à un serveur
-        // Pour cette démo, nous allons simplement afficher une alerte
-        alert(`Merci ${name} ! Votre message a été envoyé avec succès. Je vous répondrai dès que possible.`);
-        
-        // Réinitialisation du formulaire
-        contactForm.reset();
+        // Simulation d'envoi (normalement, vous utiliseriez ici une requête AJAX)
+        setTimeout(() => {
+          showNotification(`Merci ${name} ! Votre message a été envoyé.`, 'success');
+          contactForm.reset();
+        }, 1000);
       });
     }
+    
+    // Fonction pour afficher les notifications
+    function showNotification(text, type) {
+      notification.textContent = text;
+      notification.className = `notification ${type} show`;
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+    
+    // Bouton retour en haut
+    const backToTop = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
+    });
+    
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Effet de parallaxe pour la section d'accueil
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.pageYOffset;
+      const parallaxElement = document.getElementById('accueil');
+      
+      if (parallaxElement) {
+        parallaxElement.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+      }
+    });
+    
+    // Animation des projets au survol
+    const projects = document.querySelectorAll('.project');
+    
+    projects.forEach(project => {
+      project.addEventListener('mouseenter', () => {
+        project.style.transform = 'translateY(-10px)';
+      });
+      
+      project.addEventListener('mouseleave', () => {
+        project.style.transform = 'translateY(0)';
+      });
+    });
   </script>
 </body>
 </html>
