@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spatial Tech | Geomatics Portfolio</title>
+  <link rel="shortcut icon" href="./images/WhatsApp Image 2025-07-03 à 12.48.01_c6ba8855.jpg" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Variables de couleur - BLANC ET BLEU UNIQUEMENT */
+    :root {
+      --primary: #1a5276;
+      --secondary: #2874a6;
+      --accent: #3498db;
+      --light-blue: #5dade2;
+      --very-light-blue: #aed6f1;
+      --white: #ffffff;
+      --off-white: #f8f9fa;
+      --light-gray: #e8ecef;
+      --text-dark: #2c3e50;
+      --text-gray: #5a6c7d;
+      --gradient-blue: linear-gradient(135deg, #1a5276 0%, #3498db 100%);
+      --gradient-light: linear-gradient(135deg, #3498db 0%, #5dade2 100%);
+    }
+    
+    /* Réinitialisation et styles de base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.7;
+      color: var(--text-dark);
+      background: var(--white);
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    /* Animated background particles - BLEU */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(26, 82, 118, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(52, 152, 219, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(40, 116, 166, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+      animation: particleMove 20s ease-in-out infinite;
+    }
+    
+    @keyframes particleMove {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -30px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+    }
+    
+    /* En-tête moderne et compact - AMÉLIORÉ */
+    header {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 2px solid var(--very-light-blue);
+      color: var(--primary);
+      padding: 0.6rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(26, 82, 118, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      min-height: 60px;
+    }
+    
+    header.scrolled {
+      padding: 0.4rem 1.5rem;
+      background: rgba(255, 255, 255, 0.99);
+      box-shadow: 0 4px 30px rgba(26, 82, 118, 0.12);
+    }
+    
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-shrink: 1;
+      min-width: 0;
+    }
+    
+    .logo-accent {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-blue);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--white);
+      box-shadow: 0 4px 15px rgba(26, 82, 118, 0.2);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    
+    .logo-accent:hover {
+      transform: rotate(5deg) scale(1.05);
+    }
+    
+    .header-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      min-width: 0;
+      flex-shrink: 1;
+    }
+    
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      margin: 0;
+      color: var(--primary);
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    header h3 {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin: 0;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+    
+    nav {
+      flex-shrink: 1;
+      min-width: 0;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 0.2rem;
+      margin: 0;
+      flex-wrap: nowrap;
+    }
+    
+    nav a {
+      color: var(--text-dark);
+      text-decoration: none;
+      padding: 0.5rem 0.7rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-size: 0.85rem;
+      position: relative;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    
+    nav a::before {
+      content: '';
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+    
+    nav a:hover, nav a.active {
+      color: var(--accent);
+      background: rgba(52, 152, 219, 0.05);
+    }
+    
+    nav a:hover::before, nav a.active::before {
+      width: 70%;
+    }
+    
+    /* Bouton de langue stylisé - BLEU */
+    .language-toggle {
+      background: var(--white);
+      border: 2px solid var(--accent);
+      color: var(--primary);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.75rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    
+    .language-toggle:hover {
+      background: var(--gradient-blue);
+      border-color: var(--primary);
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(26, 82, 118, 0.2);
+    }
+    
+    /* Bouton menu mobile */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 1.3rem;
+      cursor: pointer;
+      z-index: 1010;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    
+    .mobile-menu-btn:hover {
+      transform: scale(1.1);
+      color: var(--accent);
+    }
+    
+    /* Sections avec design moderne - BLANC ET BLEU */
+    section {
+      background: var(--white);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 4rem 3rem;
+      margin: 3rem auto;
+      max-width: 1200px;
+      box-shadow: 
+        0 10px 40px rgba(26, 82, 118, 0.08),
+        0 0 0 1px var(--light-gray);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(40px);
+      opacity: 0;
+    }
+    
+    section.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--gradient-blue);
+      z-index: 1;
+    }
+    
+    section::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(52, 152, 219, 0.03) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    
+    section h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      margin-bottom: 2.5rem;
+      padding-bottom: 1rem;
+      font-size: 2.8rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+      letter-spacing: -1px;
+    }
+    
+    section h2 i {
+      color: var(--accent);
+      font-size: 2.2rem;
+    }
+    
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: var(--gradient-blue);
+      border-radius: 2px;
+    }
+    
+    /* Hero Section - Spectaculaire BLEU ET BLANC */
+    #accueil {
+      text-align: center;
+      padding: 8rem 3rem;
+      margin-top: 0;
+      margin-bottom: 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 92vh;
+      background: 
+        linear-gradient(135deg, rgba(26, 82, 118, 0.95) 0%, rgba(52, 152, 219, 0.9) 100%),
+        url('https://images.unsplash.com/photo-1564053489984-317bbd824340?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1796&q=80') center/cover;
+      border-radius: 0;
+      box-shadow: none;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    #accueil::before {
+      display: none;
+    }
+    
+    #accueil::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to top, var(--white), transparent);
+    }
+    
+    .hero-badge {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      color: var(--white);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      animation: fadeInDown 0.8s ease-out;
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    #accueil h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+      border: none;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    #accueil h2::after {
+      display: none;
+    }
+    
+    #accueil p {
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--white);
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+      line-height: 1.6;
+      letter-spacing: 0.5px;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+    
+    .hero-btns {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+    
+    .btn {
+      padding: 1rem 2.5rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+    
+    .btn span {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .btn i {
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease;
+    }
+    
+    .btn:hover i {
+      transform: translateX(4px);
+    }
+    
+    .btn-primary {
+      background: var(--white);
+      color: var(--primary);
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(255, 255, 255, 0.4);
+    }
+    
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      color: var(--white);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.6);
+      transform: translateY(-3px);
+    }
+    
+    /* Listes élégantes - BLEU */
+    ul {
+      padding-left: 0;
+      margin: 1.5rem 0;
+      list-style: none;
+    }
+    
+    li {
+      margin-bottom: 1.2rem;
+      position: relative;
+      padding-left: 2.5rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      transition: all 0.3s ease;
+      color: var(--text-gray);
+    }
+    
+    li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.6rem;
+      width: 12px;
+      height: 12px;
+      background: var(--gradient-blue);
+      border-radius: 3px;
+      transform: rotate(45deg);
+      transition: all 0.3s ease;
+    }
+    
+    li:hover {
+      padding-left: 3rem;
+      color: var(--primary);
+    }
+    
+    li:hover::before {
+      transform: rotate(45deg) scale(1.2);
+      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    }
+    
+    /* Grille de projets moderne - BLANC ET BLEU */
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .project {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 
+        0 4px 20px rgba(26, 82, 118, 0.08),
+        0 0 0 1px var(--light-gray);
+      cursor: pointer;
+    }
+    
+    .project:hover {
+      transform: translateY(-12px);
+      box-shadow: 
+        0 20px 50px rgba(26, 82, 118, 0.15),
+        0 0 0 2px var(--accent);
+    }
+    
+    .project::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient-blue);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+      z-index: 10;
+    }
+    
+    .project:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .project-image {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      background-color: var(--off-white);
+      transition: transform 0.6s ease;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    
+    .project:hover .project-image {
+      transform: scale(1.08);
+    }
+    
+    .project-content {
+      padding: 1.8rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .project h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    
+    .project h3 i {
+      color: var(--accent);
+      font-size: 1.3rem;
+    }
+    
+    .project p {
+      flex-grow: 1;
+      color: var(--text-gray);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    
+    .tag {
+      background: rgba(26, 82, 118, 0.05);
+      color: var(--primary);
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid rgba(26, 82, 118, 0.15);
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+    
+    .tag:hover {
+      background: var(--gradient-blue);
+      color: var(--white);
+      border-color: transparent;
+      transform: translateY(-2px);
+    }
+    
+    .project-bg {
+      display: none;
+    }
+    
+    .more-projects {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 1.2rem;
+      color: var(--primary);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      padding: 1.5rem;
+      background: rgba(26, 82, 118, 0.03);
+      border-radius: 12px;
+      border: 2px dashed rgba(52, 152, 219, 0.3);
+    }
+    
+    /* Section Contact moderne - BLEU ET BLANC */
+    #contact {
+      text-align: center;
+      padding: 4rem 3rem;
+    }
+    
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .contact-info {
+      background: rgba(26, 82, 118, 0.03);
+      padding: 3rem;
+      border-radius: 16px;
+      border: 2px solid var(--very-light-blue);
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .contact-info::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--gradient-blue);
+    }
+    
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    
+    .contact-info h3 i {
+      color: var(--accent);
+    }
+    
+    .contact-info p {
+      margin: 1.5rem 0;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.3s ease;
+      padding: 0.5rem 0;
+      color: var(--text-gray);
+    }
+    
+    .contact-info p:hover {
+      padding-left: 1rem;
+    }
+    
+    .contact-info p i {
+      color: var(--accent);
+      font-size: 1.2rem;
+      width: 24px;
+    }
+    
+    .contact-info a {
+      color: var(--secondary);
+      text-decoration: none;
+      transition: all 0.3s;
+      font-weight: 500;
+      position: relative;
+    }
+    
+    .contact-info a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    
+    .contact-info a:hover {
+      color: var(--accent);
+    }
+    
+    .contact-info a:hover::after {
+      width: 100%;
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 3rem;
+    }
+    
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-blue);
+      color: var(--white);
+      border-radius: 14px;
+      font-size: 1.5rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 20px rgba(26, 82, 118, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .social-icons a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: var(--gradient-light);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.5s ease;
+    }
+    
+    .social-icons a:hover::before {
+      width: 200px;
+      height: 200px;
+    }
+    
+    .social-icons a i {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .social-icons a:hover {
+      transform: translateY(-8px) rotate(5deg);
+      box-shadow: 0 15px 35px rgba(52, 152, 219, 0.3);
+    }
+    
+    /* Notification moderne - BLEU */
+    .notification {
+      position: fixed;
+      top: 100px;
+      right: 30px;
+      padding: 1.2rem 2rem;
+      border-radius: 12px;
+      color: var(--white);
+      font-weight: 600;
+      z-index: 2000;
+      opacity: 0;
+      transform: translateX(120px);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 10px 30px rgba(26, 82, 118, 0.3);
+      backdrop-filter: blur(10px);
+    }
+    
+    .notification.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .notification.success {
+      background: var(--gradient-blue);
+    }
+    
+    .notification.error {
+      background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+    }
+    
+    /* Footer élégant - BLEU */
+    footer {
+      background: var(--gradient-blue);
+      color: var(--white);
+      text-align: center;
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    footer p {
+      opacity: 0.95;
+      font-size: 0.95rem;
+    }
+    
+    /* Bouton retour en haut stylisé - BLEU */
+    .back-to-top {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      width: 56px;
+      height: 56px;
+      background: var(--gradient-blue);
+      color: var(--white);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(30px) rotate(0deg);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(26, 82, 118, 0.3);
+    }
+    
+    .back-to-top.show {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
+    
+    .back-to-top:hover {
+      transform: translateY(-5px) rotate(360deg);
+      box-shadow: 0 15px 40px rgba(52, 152, 219, 0.4);
+    }
+    
+    /* Style pour la vidéo dans les projets */
+    .project video.project-image {
+      object-fit: cover;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      header {
+        padding: 0.6rem 1rem;
+      }
+      
+      nav a {
+        padding: 0.5rem 0.5rem;
+        font-size: 0.8rem;
+      }
+      
+      .header-right {
+        gap: 0.7rem;
+      }
+    }
+    
+    @media (max-width: 1000px) {
+      .projects-container {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      }
+      
+      header h1 {
+        font-size: 1rem;
+      }
+      
+      header h3 {
+        font-size: 0.65rem;
+      }
+      
+      .logo-accent {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      section {
+        padding: 3rem 2rem;
+        margin: 2rem 1.5rem;
+      }
+      
+      header {
+        padding: 0.7rem 1rem;
+      }
+      
+      .header-left {
+        gap: 0.6rem;
+      }
+      
+      #accueil {
+        padding: 6rem 2rem;
+      }
+      
+      #accueil h2 {
+        font-size: 3rem;
+      }
+      
+      #accueil p {
+        font-size: 1.2rem;
+      }
+      
+      section h2 {
+        font-size: 2.2rem;
+      }
+      
+      .projects-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero-btns {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .btn {
+        justify-content: center;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 1rem;
+        border-top: 2px solid var(--very-light-blue);
+        box-shadow: 0 10px 30px rgba(26, 82, 118, 0.15);
+      }
+      
+      nav ul.active {
+        display: flex;
+      }
+      
+      nav a {
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      header {
+        flex-wrap: wrap;
+      }
+      
+      .header-right {
+        gap: 0.8rem;
+      }
+      
+      header h1 {
+        font-size: 0.95rem;
+      }
+      
+      header h3 {
+        font-size: 0.6rem;
+        letter-spacing: 1px;
+      }
+      
+      .language-toggle {
+        font-size: 0.7rem;
+        padding: 0.35rem 0.7rem;
+      }
+      
+      #accueil h2 {
+        font-size: 2.5rem;
+      }
+      
+      #accueil p {
+        font-size: 1.1rem;
+      }
+      
+      section h2 {
+        font-size: 2rem;
+      }
+      
+      .project-image {
+        height: 200px;
+      }
+      
+      .contact-info {
+        padding: 2rem;
+      }
+      
+      .social-icons a {
+        width: 54px;
+        height: 54px;
+        font-size: 1.3rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      #accueil {
+        padding: 5rem 1.5rem;
+      }
+      
+      #accueil h2 {
+        font-size: 2rem;
+      }
+      
+      #accueil p {
+        font-size: 1rem;
+      }
+      
+      section {
+        padding: 2.5rem 1.5rem;
+      }
+      
+      section h2 {
+        font-size: 1.8rem;
+      }
+      
+      .project-content {
+        padding: 1.5rem;
+      }
+      
+      .project-image {
+        height: 180px;
+      }
+      
+      header h1 {
+        font-size: 0.85rem;
+      }
+      
+      .logo-accent {
+        width: 32px;
+        height: 32px;
+        font-size: 1.1rem;
+      }
+    }
+    
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+
+  <header id="mainHeader">
+    <div class="header-left">
+      <div class="logo-accent">
+        <i class="fas fa-globe-africa"></i>
+      </div>
+      <div class="header-text">
+        <h1>Thiombiano Serges Honoré</h1>
+        <h3>Spatial Tech</h3>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="mobile-menu-btn" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav>
+        <ul id="navMenu">
+          <li><a href="#accueil" class="active" data-en="Home" data-fr="Accueil">Home</a></li>
+          <li><a href="#formation" data-en="Education" data-fr="Formation">Education</a></li>
+          <li><a href="#a-propos" data-en="About" data-fr="À propos">About</a></li>
+          <li><a href="#competences" data-en="Skills" data-fr="Compétences">Skills</a></li>
+          <li><a href="#services" data-en="Services" data-fr="Services">Services</a></li>
+          <li><a href="#projets" data-en="Projects" data-fr="Projets">Projects</a></li>
+          <li><a href="#contact" data-en="Contact" data-fr="Contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="language-toggle" id="langToggle">
+        <i class="fas fa-globe"></i>
+        <span>FR</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section id="accueil">
+      <div class="hero-badge" data-en="Geospatial Expert" data-fr="Expert Géospatial">Geospatial Expert</div>
+      <h2><span data-en="Welcome to my portfolio" data-fr="Bienvenue sur mon portfolio">Welcome to my portfolio</span></h2>
+      <p data-en="Geomatics & Spatial Intelligence for Development" data-fr="Géomatique & Intelligence spatiale au service du développement">Geomatics & Spatial Intelligence for Development</p>
+      <div class="hero-btns">
+        <a href="#projets" class="btn btn-primary">
+          <span data-en="View my projects" data-fr="Voir mes projets">View my projects</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+        <a href="#contact" class="btn btn-secondary">
+          <span data-en="Contact me" data-fr="Me contacter">Contact me</span>
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </section>
+    
+    <section id="formation">
+      <h2><i class="fas fa-graduation-cap"></i> <span data-en="Education" data-fr="Formation">Education</span></h2>
+      <ul>
+        <li data-en="Bachelor's Degree in Applied Geomatics" data-fr="Licence en Géomatique appliquée">Bachelor's Degree in Applied Geomatics</li>
+        <li data-en="Training at Orange Digital Center (ODC)" data-fr="Formation à Orange Digital center (ODC)">Training at Orange Digital Center (ODC)</li>
+        <li data-en="Internship at SEREIN-GE" data-fr="Stage à SEREIN-GE">Internship at SEREIN-GE</li>
+        <li data-en="Internship at BCEF Engineering and IT" data-fr="Stage à BCEF ingenierie et informatique">Internship at BCEF Engineering and IT</li>
+        <li data-en="Internship at WASCAL" data-fr="Stage à WASCAL">Internship at WASCAL</li>
+        <li data-en="Drone Remote Pilot Certificate for subcategories A1/A3 (EASA Open Category) issued by the French DGAC" data-fr="Attestation de Télépilote de Drone pour les sous-catégories A1/A3 (Catégorie Ouverte EASA) délivrée par la DGAC Française">Drone Remote Pilot Certificate for subcategories A1/A3 (EASA Open Category) issued by the French DGAC</li>
+        <li data-en="Digital Earth Africa Certification in Sandbox Usage (Python), Urbanization, and Water Cycle" data-fr="Certification de Digital earth Africa en usage de sandbox(python), urbanisation, et cycle hydrique">Digital Earth Africa Certification in Sandbox Usage (Python), Urbanization, and Water Cycle</li>
+        <li data-en="Eetroov Certification: Geodata and Parcel Polygons - Agricultural Area Mapping with QGIS" data-fr="Certification de Eetroov GÉODONNÉES ET POLYGONES DES PARCELLES CARTOGRAPHIE ZONE D'EXPLOITATION AGRICOLE AVEC QGIS">Eetroov Certification: Geodata and Parcel Polygons - Agricultural Area Mapping with QGIS</li>
+        <li data-en="UNITAR Certification in Climate Change Negotiations " data-fr="Certification de UNITAR en Négociations sur le changement climatique">UNITAR Certification in Climate Change Negotiations</li>
+        <li data-en="Certificate of Completion in Solution Creation Entrepreneurship Training  by Nestlé YEP Academy" data-fr="Certificat d'achèvement en formation à l'entrepreneuriat en création de solutions par Nestlé YEP Academy">Certificate of Completion in Solution Creation Entrepreneurship Training  by Nestlé YEP Academy</li>
+      </ul>
+    </section>
+    
+    <section id="a-propos">
+      <h2><i class="fas fa-user"></i> <span data-en="About Me" data-fr="À propos">About Me</span></h2>
+      <p data-en="My name is Thiombiano Serges Honoré, passionate about geospatial sciences, GIS technologies, and spatial analysis applied to sustainable development." data-fr="Je m'appelle Thiombiano Serges Honoré, passionné par les sciences géospatiales, les technologies SIG et l'analyse spatiale appliquée au développement durable.">My name is Thiombiano Serges Honoré, passionate about geospatial sciences, GIS technologies, and spatial analysis applied to sustainable development.</p>
+      <p data-en="Currently studying geomatics, I specialize in Geographic Information Systems, remote sensing, databases, and tools like QGIS, Google Earth Engine, and Python to solve environmental, agricultural, and mining challenges." data-fr="Actuellement en formation en géomatique, je me spécialise dans l'exploitation des Systèmes d'Information Géographique, de la télédétection spatiale, des bases de données et des outils comme QGIS, Google Earth Engine et Python pour résoudre des problématiques environnementales, agricoles et minières.">Currently studying geomatics, I specialize in Geographic Information Systems, remote sensing, databases, and tools like QGIS, Google Earth Engine, and Python to solve environmental, agricultural, and mining challenges.</p>
+      <p data-en="My goal is to put technology at the service of communities, combining innovation, precision, and accessibility." data-fr="Mon objectif est de mettre la technologie au service des communautés, en combinant innovation, précision et accessibilité.">My goal is to put technology at the service of communities, combining innovation, precision, and accessibility.</p>
+    </section>
+
+    <section id="competences">
+      <h2><i class="fas fa-cogs"></i> <span data-en="Skills" data-fr="Compétences">Skills</span></h2>
+      <ul>
+        <li data-en="Geographic Information Systems (GIS)" data-fr="Systèmes d'Information Géographique (SIG)">Geographic Information Systems (GIS)</li>
+        <li data-en="Remote Sensing and Satellite Image Processing" data-fr="Télédétection et traitement d'images satellite">Remote Sensing and Satellite Image Processing</li>
+        <li data-en="Digital and Interactive Mapping" data-fr="Cartographie numérique et interactive">Digital and Interactive Mapping</li>
+        <li data-en="Spatial Modeling and Analysis" data-fr="Modélisation spatiale et analyse spatiale">Spatial Modeling and Analysis</li>
+        <li data-en="Photogrammetry (Stereoscopy, Orthophoto, etc.)" data-fr="Photogrammétrie (stéréoscopie, orthophoto, etc.)">Photogrammetry (Stereoscopy, Orthophoto, etc.)</li>
+        <li data-en="Field Data Collection (GPS, Mobile)" data-fr="Collecte de données terrain (GPS, mobile)">Field Data Collection (GPS, Mobile)</li>
+        <li data-en="GEE and Python Scripting" data-fr="Scripts GGE et Python">GEE and Python Scripting</li>
+      </ul>
+    </section>
+
+    <section id="services">
+      <h2><i class="fas fa-concierge-bell"></i> <span data-en="Services" data-fr="Services">Services</span></h2>
+      <ul>
+        <li data-en="GIS Mapping" data-fr="Cartographie SIG">GIS Mapping</li>
+        <li data-en="Satellite Image Analysis / Remote Sensing" data-fr="Analyse d'images satellite / Télédétection">Satellite Image Analysis / Remote Sensing</li>
+        <li data-en="Spatial & Geostatistical Analysis" data-fr="Analyse spatiale & géostatistique">Spatial & Geostatistical Analysis</li>
+        <li data-en="Field Data Collection & Processing" data-fr="Collecte & traitement de données terrain">Field Data Collection & Processing</li>
+        <li data-en="Web Map Development" data-fr="Développement de cartes web">Web Map Development</li>
+        <li data-en="Geospatial Database Management" data-fr="Gestion de base de données géospatiales">Geospatial Database Management</li>
+        <li data-en="GIS Training and Support" data-fr="Formation et accompagnement SIG">GIS Training and Support</li>
+      </ul>
+    </section>
+
+    <section id="projets">
+      <h2><i class="fas fa-project-diagram"></i> <span data-en="Completed Projects" data-fr="Projets réalisés">Completed Projects</span></h2>
+      
+      <div class="projects-container">
+        <div class="project">
+          <img src="./images/Classif.PNG" alt="Cartographie de Ouagadougou" class="project-image">
+          <div class="project-content">
+            <h3><i class="fas fa-map"></i> <span data-en="Mapping of Ouagadougou" data-fr="Cartographie de Ouagadougou">Mapping of Ouagadougou</span></h3>
+            <p data-en="Analysis of land use evolution in Ouagadougou using Landsat satellite images with supervised classification and Random Forest algorithm." data-fr="Analyse de l'évolution de l'occupation du sol à Ouagadougou à l'aide d'images satellites Landsat avec classification supervisée et algorithme Random Forest.">Analysis of land use evolution in Ouagadougou using Landsat satellite images with supervised classification and Random Forest algorithm.</p>
+            <div class="project-tags">
+              <span class="tag">QGIS</span>
+              <span class="tag">Landsat</span>
+              <span class="tag" data-en="Classification" data-fr="Classification">Classification</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project">
+          <img src="./images/Carte_tampon.PNG" alt="Identification des zones dangereuses" class="project-image">
+          <div class="project-content">
+            <h3><i class="fas fa-exclamation-triangle"></i> <span data-en="Risk Zone Identification" data-fr="Identification des zones à risque">Risk Zone Identification</span></h3>
+            <p data-en="Assessment of road hazards to take all necessary precautions in these critical areas." data-fr="Évaluation des dangers routiers afin de prendre toutes les précautions nécessaires dans ces zones critiques.">Assessment of road hazards to take all necessary precautions in these critical areas.</p>
+            <div class="project-tags">
+              <span class="tag" data-en="Spatial Analysis" data-fr="Analyse Spatiale">Spatial Analysis</span>
+              <span class="tag" data-en="Mapping" data-fr="Cartographie">Mapping</span>
+              <span class="tag" data-en="Safety" data-fr="Sécurité">Safety</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project">
+          <img src="./images/carte pluviometrique.PNG" class="project-image">
+          <div class="project-content">
+            <h3><i class="fas fa-cloud-sun-rain"></i> <span data-en="GLDAS Climate Data" data-fr="Données climatiques GLDAS">GLDAS Climate Data</span></h3>
+            <p data-en="Extraction and processing of GLDAS spatialized climate data to calculate rainfall accumulations in the provinces of Burkina Faso." data-fr="Extraction et traitement de données climatiques spatialisées GLDAS pour calculer les cumuls pluviométriques sur les provinces du Burkina Faso.">Extraction and processing of GLDAS spatialized climate data to calculate rainfall accumulations in the provinces of Burkina Faso.</p>
+            <div class="project-tags">
+              <span class="tag" data-en="Climatology" data-fr="Climatologie">Climatology</span>
+              <span class="tag">GLDAS</span>
+              <span class="tag">Python</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project">
+          <img src="./images/Capture1.PNG" alt="Base de données foncière" class="project-image">
+          <div class="project-content">
+            <h3><i class="fas fa-database"></i> <span data-en="Land Database" data-fr="Base de données foncière">Land Database</span></h3>
+            <p data-en="Creation of a conceptual and logical model to structure land data for a municipality." data-fr="Réalisation d'un modèle conceptuel et logique pour structurer les données foncières d'une commune.">Creation of a conceptual and logical model to structure land data for a municipality.</p>
+            <div class="project-tags">
+              <span class="tag" data-en="Database" data-fr="Base de données">Database</span>
+              <span class="tag" data-en="Land" data-fr="Foncier">Land</span>
+              <span class="tag">PostGIS</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project">
+          <img src="./images/GEE.PNG" alt="Détection d'inondations" class="project-image">
+          <div class="project-content">
+            <h3><i class="fas fa-water"></i> <span data-en="Flood Detection" data-fr="Détection d'inondations">Flood Detection</span></h3>
+            <p data-en="Geospatial analysis with Sentinel images to identify flooded areas around the Hèrèdougou bridge." data-fr="Analyse géospatiale avec images Sentinel pour identifier les zones inondées autour du pont de Hèrèdougou.">Geospatial analysis with Sentinel images to identify flooded areas around the Hèrèdougou bridge.</p>
+            <div class="project-tags">
+              <span class="tag" data-en="Remote Sensing" data-fr="Télédétection">Remote Sensing</span>
+              <span class="tag">Sentinel</span>
+              <span class="tag">GEE</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Site web" class="project-image">
+          <div class="project-content">
+            <h3><i class="fas fa-laptop-code"></i> <span data-en="Showcase Website" data-fr="Site web vitrine">Showcase Website</span></h3>
+            <p data-en="Development of a showcase website for BCEF Engineering and IT using HTML, CSS, and JavaScript." data-fr="Mise en place d'un site vitrine pour BCEF ingenierie et informatique avec HTML, CSS et JavaScript.">Development of a showcase website for BCEF Engineering and IT using HTML, CSS, and JavaScript.</p>
+            <div class="project-tags">
+              <span class="tag">Web</span>
+              <span class="tag">HTML/CSS</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project">
+          <img src="./images/Carte1.PNG" alt="Analyse de Huff" class="project-image">
+          <div class="project-content">
+            <h3><i class="fas fa-chart-line"></i> <span data-en="Huff Analysis" data-fr="Analyse de Huff">Huff Analysis</span></h3>
+            <p data-en="Spatial analysis to identify attractive provinces and demographic disparities." data-fr="Analyse spatiale permettant d'identifier les provinces attractives et les disparités démographiques.">Spatial analysis to identify attractive provinces and demographic disparities.</p>
+            <div class="project-tags">
+              <span class="tag" data-en="Analysis" data-fr="Analyse">Analysis</span>
+              <span class="tag" data-en="Modeling" data-fr="Modélisation">Modeling</span>
+              <span class="tag" data-en="Demography" data-fr="Démographie">Demography</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project">
+          <img src="./images/pyqgis.PNG" alt="Planification d'infrastructures" class="project-image">
+          <div class="project-content">
+            <h3><i class="fas fa-road"></i> <span data-en="Infrastructure Planning" data-fr="Planification d'infrastructures">Infrastructure Planning</span></h3>
+            <p data-en="Spatial analysis to optimize humanitarian aid so that every Burkinabe has access to drinking water." data-fr="Analyse spatiale pour optimiser l'aide humanitaire afin que tout burkinabè ait accès à l'eau potable.">Spatial analysis to optimize humanitarian aid so that every Burkinabe has access to drinking water.</p>
+            <div class="project-tags">
+              <span class="tag" data-en="Planning" data-fr="Planification">Planning</span>
+              <span class="tag" data-en="Infrastructure" data-fr="Infrastructures">Infrastructure</span>
+              <span class="tag" data-en="Humanitarian" data-fr="Humanitaire">Humanitarian</span>
+            </div>
+          </div>
+        </div>
+      
+        <div class="project">
+          <img src="./images/Capture d'écran 2025-12-30 120003.png" alt="F-DAM" class="project-image">
+          <div class="project-content">
+            <h3><i class="fas fa-water"></i> F-DAM</h3>
+            <p data-en="Flood Damage Assessment and Monitoring." data-fr="Flood Damage Assessment and Monitoring.">Flood Damage Assessment and Monitoring.</p>
+            <div class="project-tags">
+              <span class="tag">Web</span>
+              <span class="tag">HTML/CSS</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project">
+          <img src="./images/WhatsApp Image 2026-01-28 at 15.42.05 (1).jpeg" alt="Presentation" class="project-image">
+          <div class="project-content">
+            <h3><i class="fas fa-presentation"></i> <span data-en="Solution Presentation in Addis Ababa" data-fr="Presentation de solution à Addis Abeba">Solution Presentation in Addis Ababa</span></h3>
+            <p data-en="Poster presentation" data-fr="Presentation de poster">Poster presentation</p>
+            <div class="project-tags">
+              <span class="tag" data-en="Graphics" data-fr="Graphisme">Graphics</span>
+              <span class="tag">Script</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project">
+          <img src="./images/carte.PNG" alt="Industries" class="project-image">
+          <div class="project-content">
+            <h3><i class="fas fa-industry"></i> <span data-en="Industry Identification" data-fr="Identification des industries">Industry Identification</span></h3>
+            <p data-en="Industrial biomass processing units" data-fr="Unité industrielle de transformation de biomasse">Industrial biomass processing units</p>
+            <div class="project-tags">
+              <span class="tag" data-en="Mapping" data-fr="Cartographie">Mapping</span>
+              <span class="tag">QGIS</span>
+              <span class="tag" data-en="Industries" data-fr="Industries">Industries</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project">
+          <video autoplay muted loop controls class="project-image" poster="./images/WhatsApp Image 2026-01-28 at 15.42.05 (1).jpeg">
+            <source src="./images/Poster_competition.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="project-content">
+            <h3><i class="fas fa-video"></i> <span data-en="DIWASA Video Presentation" data-fr="Présentation vidéo DIWASA">DIWASA Video Presentation</span></h3>
+            <p data-en="Video presentation of the digital solution selected in the Top 8 of the DIWASA 2025 Pan-African Symposium." data-fr="Vidéo de présentation de la solution numérique sélectionnée au Top 8 du Symposium Panafricain DIWASA 2025.">Video presentation of the digital solution selected in the Top 8 of the DIWASA 2025 Pan-African Symposium.</p>
+            <div class="project-tags">
+              <span class="tag">DIWASA</span>
+              <span class="tag" data-en="Presentation" data-fr="Présentation">Presentation</span>
+              <span class="tag" data-en="Video" data-fr="Vidéo">Video</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="more-projects">
+        <i class="fas fa-plus-circle"></i> 
+        <span data-en="And many more exciting projects..." data-fr="Et bien d'autres projets passionnants...">And many more exciting projects...</span>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2><i class="fas fa-envelope"></i> <span data-en="Contact" data-fr="Contact">Contact</span></h2>
+      <p data-en="Feel free to contact me to discuss projects, collaborations, or opportunities" data-fr="N'hésitez pas à me contacter pour discuter de projets, collaborations ou opportunités">Feel free to contact me to discuss projects, collaborations, or opportunities</p>
+      
+      <div class="contact-container">
+        <div class="contact-info">
+          <h3><i class="fas fa-address-card"></i> <span data-en="My Contact Information" data-fr="Mes coordonnées">My Contact Information</span></h3>
+          <p><i class="fas fa-user"></i> Thiombiano Serges Honoré</p>
+          <p><i class="fas fa-map-marker-alt"></i> Ouagadougou, Burkina Faso</p>
+          <p><i class="fas fa-phone"></i> WhatsApp: <a href="https://wa.me/22652922901">(+226) 52 92 29 01</a></p>
+          <p><i class="fas fa-envelope"></i> Email: <a href="mailto:thiombianosergeshonore@gmail.com">thiombianosergeshonore@gmail.com</a></p>
+          <p><i class="fab fa-linkedin"></i> LinkedIn: <a href="https://www.linkedin.com/in/serges-honoré-thiombiano-7910302a8">Serges Honoré Thiombiano</a></p>
+          
+          <div class="social-icons">
+            <a href="https://www.linkedin.com/in/serges-honoré-thiombiano-7910302a8" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:thiombianosergeshonore@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://wa.me/22652922901" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" aria-label="Portfolio"><i class="fas fa-globe"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p>© 2025 Thiombiano Serges Honoré | <span data-en="All rights reserved" data-fr="Tous droits réservés">All rights reserved</span></p>
+    <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.9;">
+      <i class="fas fa-map-marker-alt"></i> Ouagadougou, Burkina Faso
+    </p>
+  </footer>
+  
+  <div class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+  
+  <div class="notification" id="notification"></div>
+
+  <script>
+    // Système de traduction
+    let currentLang = 'en';
+    
+    const langToggle = document.getElementById('langToggle');
+    
+    function switchLanguage() {
+      currentLang = currentLang === 'en' ? 'fr' : 'en';
+      
+      langToggle.querySelector('span').textContent = currentLang === 'en' ? 'FR' : 'EN';
+      document.documentElement.lang = currentLang;
+      
+      document.querySelectorAll('[data-en][data-fr]').forEach(element => {
+        element.textContent = element.getAttribute(`data-${currentLang}`);
+      });
+      
+      // Notification de changement de langue
+      showNotification(
+        currentLang === 'en' 
+          ? 'Language switched to English' 
+          : 'Langue changée en Français',
+        'success'
+      );
+    }
+    
+    // Initialiser la langue au chargement
+    document.addEventListener('DOMContentLoaded', () => {
+      document.documentElement.lang = currentLang;
+      
+      // Initialiser les textes
+      document.querySelectorAll('[data-en][data-fr]').forEach(element => {
+        element.textContent = element.getAttribute(`data-${currentLang}`);
+      });
+    });
+    
+    langToggle.addEventListener('click', switchLanguage);
+    
+    // Header scroll effect
+    const header = document.getElementById('mainHeader');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      
+      lastScroll = currentScroll;
+    });
+    
+    // Menu mobile
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.getElementById('navMenu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+    });
+    
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+    
+    // Mise à jour du lien actif lors du défilement
+    function updateActiveNavLink() {
+      let current = '';
+      const sections = document.querySelectorAll('section');
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (pageYOffset >= sectionTop - 150) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', updateActiveNavLink);
+    
+    // Smooth scrolling avec mise à jour du lien actif
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offsetTop = target.offsetTop - 80;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+          
+          // Mettre à jour les liens actifs
+          setTimeout(updateActiveNavLink, 300);
+        }
+      });
+    });
+    
+    // Animation des sections
+    const sections = document.querySelectorAll('section');
+    
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+    
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+    
+    // Bouton retour en haut
+    const backToTop = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 400) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
+    });
+    
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Animation des projets
+    const projects = document.querySelectorAll('.project');
+    
+    projects.forEach((project, index) => {
+      project.style.animationDelay = `${index * 0.1}s`;
+    });
+    
+    // Fonction de notification
+    function showNotification(message, type = 'success') {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.className = `notification ${type}`;
+      notification.classList.add('show');
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+    
+    // Gestion des clics sur les projets (optionnel)
+    projects.forEach(project => {
+      project.addEventListener('click', () => {
+        const title = project.querySelector('h3 span').textContent;
+        showNotification(
+          currentLang === 'en' 
+            ? `Viewing project: ${title}` 
+            : `Visualisation du projet: ${title}`,
+          'success'
+        );
+      });
+    });
+    
+    // Initialiser la navigation active au chargement
+    updateActiveNavLink();
+  </script>
+</body>
+</html>
