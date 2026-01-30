@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* Variables de couleur - BLANC ET BLEU UNIQUEMENT */
+    /* Variables de couleur */
     :root {
       --primary: #1a5276;
       --secondary: #2874a6;
@@ -26,11 +26,12 @@
       --gradient-light: linear-gradient(135deg, #3498db 0%, #5dade2 100%);
     }
     
-    /* Réinitialisation et styles de base */
+    /* Réinitialisation */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
     
     body {
@@ -40,9 +41,10 @@
       background: var(--white);
       overflow-x: hidden;
       position: relative;
+      font-size: 16px;
     }
     
-    /* Animated background particles - BLEU */
+    /* Animated background */
     body::before {
       content: '';
       position: fixed;
@@ -52,67 +54,60 @@
       height: 100%;
       background: 
         radial-gradient(circle at 20% 50%, rgba(26, 82, 118, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(52, 152, 219, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(40, 116, 166, 0.03) 0%, transparent 50%);
+        radial-gradient(circle at 80% 80%, rgba(52, 152, 219, 0.03) 0%, transparent 50%);
       pointer-events: none;
       z-index: 0;
-      animation: particleMove 20s ease-in-out infinite;
     }
     
-    @keyframes particleMove {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -30px) scale(1.1); }
-      66% { transform: translate(-20px, 20px) scale(0.9); }
-    }
-    
-    /* En-tête moderne et compact - AMÉLIORÉ */
+    /* En-tête responsive */
     header {
       background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px);
       border-bottom: 2px solid var(--very-light-blue);
       color: var(--primary);
-      padding: 0.8rem 1rem;
+      padding: 1rem 1.5rem;
       position: sticky;
       top: 0;
       z-index: 1000;
       box-shadow: 0 2px 20px rgba(26, 82, 118, 0.08);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      min-height: 60px;
+      transition: all 0.3s ease;
     }
     
     header.scrolled {
-      padding: 0.5rem 1rem;
-      background: rgba(255, 255, 255, 0.99);
+      padding: 0.7rem 1.5rem;
       box-shadow: 0 4px 30px rgba(26, 82, 118, 0.12);
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 1rem;
     }
     
     .header-left {
       display: flex;
       align-items: center;
-      gap: 0.8rem;
-      flex-shrink: 1;
+      gap: 1rem;
+      flex: 1;
       min-width: 0;
-      max-width: 60%;
     }
     
     .logo-accent {
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       background: var(--gradient-blue);
-      border-radius: 10px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
-      font-weight: 900;
+      font-size: 1.4rem;
       color: var(--white);
       box-shadow: 0 4px 15px rgba(26, 82, 118, 0.2);
-      transition: transform 0.3s ease;
       flex-shrink: 0;
+      transition: transform 0.3s ease;
     }
     
     .logo-accent:hover {
@@ -122,26 +117,24 @@
     .header-text {
       display: flex;
       flex-direction: column;
-      gap: 0.1rem;
+      gap: 0.2rem;
       min-width: 0;
-      flex-shrink: 1;
-      overflow: hidden;
+      flex: 1;
     }
     
     header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       font-weight: 900;
-      margin: 0;
       color: var(--primary);
-      letter-spacing: -0.3px;
+      margin: 0;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     
     header h3 {
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       font-weight: 500;
       color: var(--accent);
       margin: 0;
@@ -153,40 +146,38 @@
     .header-right {
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 1rem;
       flex-shrink: 0;
     }
     
+    /* Navigation */
     nav {
-      flex-shrink: 1;
-      min-width: 0;
+      position: relative;
     }
     
     nav ul {
       display: flex;
       list-style: none;
-      gap: 0.2rem;
+      gap: 0.5rem;
       margin: 0;
-      flex-wrap: nowrap;
     }
     
     nav a {
       color: var(--text-dark);
       text-decoration: none;
-      padding: 0.5rem 0.7rem;
+      padding: 0.6rem 1rem;
       border-radius: 8px;
       transition: all 0.3s ease;
       font-weight: 500;
-      font-size: 0.85rem;
-      position: relative;
-      letter-spacing: 0.3px;
+      font-size: 0.9rem;
       white-space: nowrap;
+      position: relative;
     }
     
     nav a::before {
       content: '';
       position: absolute;
-      bottom: 6px;
+      bottom: 8px;
       left: 50%;
       width: 0;
       height: 2px;
@@ -201,49 +192,45 @@
     }
     
     nav a:hover::before, nav a.active::before {
-      width: 70%;
+      width: 60%;
     }
     
-    /* Bouton de langue stylisé - BLEU */
+    /* Bouton langue */
     .language-toggle {
       background: var(--white);
       border: 2px solid var(--accent);
       color: var(--primary);
-      padding: 0.4rem 0.8rem;
+      padding: 0.5rem 1rem;
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
       letter-spacing: 1px;
       text-transform: uppercase;
       white-space: nowrap;
-      flex-shrink: 0;
     }
     
     .language-toggle:hover {
       background: var(--gradient-blue);
-      border-color: var(--primary);
       color: var(--white);
       transform: translateY(-2px);
       box-shadow: 0 6px 15px rgba(26, 82, 118, 0.2);
     }
     
-    /* Bouton menu mobile */
+    /* Menu mobile */
     .mobile-menu-btn {
       display: none;
       background: none;
       border: none;
       color: var(--primary);
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       cursor: pointer;
-      z-index: 1010;
+      padding: 0.5rem;
       transition: transform 0.3s ease;
-      flex-shrink: 0;
-      padding: 0.3rem;
     }
     
     .mobile-menu-btn:hover {
@@ -251,20 +238,17 @@
       color: var(--accent);
     }
     
-    /* Sections avec design moderne - BLANC ET BLEU */
+    /* Sections */
     section {
       background: var(--white);
-      backdrop-filter: blur(10px);
       border-radius: 20px;
-      padding: 3rem 2rem;
-      margin: 2rem auto;
+      padding: 4rem 3rem;
+      margin: 2.5rem auto;
       max-width: 1200px;
-      box-shadow: 
-        0 10px 40px rgba(26, 82, 118, 0.08),
-        0 0 0 1px var(--light-gray);
+      box-shadow: 0 10px 40px rgba(26, 82, 118, 0.08);
       position: relative;
       overflow: hidden;
-      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.6s ease;
       transform: translateY(40px);
       opacity: 0;
     }
@@ -282,40 +266,24 @@
       width: 100%;
       height: 5px;
       background: var(--gradient-blue);
-      z-index: 1;
-    }
-    
-    section::after {
-      content: "";
-      position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(52, 152, 219, 0.03) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
     }
     
     section h2 {
       font-family: 'Playfair Display', serif;
       color: var(--primary);
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
       padding-bottom: 1rem;
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       font-weight: 900;
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 1rem;
       position: relative;
-      letter-spacing: -1px;
-      flex-wrap: wrap;
     }
     
     section h2 i {
       color: var(--accent);
-      font-size: 1.8rem;
-      flex-shrink: 0;
+      font-size: 2rem;
     }
     
     section h2::after {
@@ -329,49 +297,36 @@
       border-radius: 2px;
     }
     
-    /* Hero Section - Spectaculaire BLEU ET BLANC */
+    /* Hero Section */
     #accueil {
       text-align: center;
-      padding: 6rem 2rem;
+      padding: 8rem 3rem;
       margin-top: 0;
-      margin-bottom: 3rem;
+      min-height: 90vh;
+      background: 
+        linear-gradient(135deg, rgba(26, 82, 118, 0.95) 0%, rgba(52, 152, 219, 0.9) 100%),
+        url('https://images.unsplash.com/photo-1564053489984-317bbd824340?auto=format&fit=crop&w=1796&q=80') center/cover;
+      border-radius: 0;
+      box-shadow: none;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 85vh;
-      background: 
-        linear-gradient(135deg, rgba(26, 82, 118, 0.95) 0%, rgba(52, 152, 219, 0.9) 100%),
-        url('https://images.unsplash.com/photo-1564053489984-317bbd824340?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1796&q=80') center/cover;
-      border-radius: 0;
-      box-shadow: none;
-      position: relative;
-      overflow: hidden;
     }
     
     #accueil::before {
       display: none;
     }
     
-    #accueil::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 100%;
-      height: 100px;
-      background: linear-gradient(to top, var(--white), transparent);
-    }
-    
     .hero-badge {
       display: inline-block;
-      padding: 0.5rem 1.5rem;
+      padding: 0.6rem 1.8rem;
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 50px;
       color: var(--white);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 600;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -380,38 +335,23 @@
     }
     
     @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
     #accueil h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3.5rem;
+      font-size: 4rem;
       margin-bottom: 1.5rem;
       color: var(--white);
       border: none;
       text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      font-weight: 900;
       line-height: 1.1;
-      letter-spacing: -2px;
       animation: fadeInUp 0.8s ease-out 0.2s both;
     }
     
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
     #accueil h2::after {
@@ -419,14 +359,11 @@
     }
     
     #accueil p {
-      font-size: 1.3rem;
-      font-weight: 400;
+      font-size: 1.4rem;
       color: var(--white);
       max-width: 700px;
       margin: 0 auto 3rem;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-      line-height: 1.6;
-      letter-spacing: 0.5px;
       animation: fadeInUp 0.8s ease-out 0.4s both;
     }
     
@@ -440,20 +377,19 @@
     }
     
     .btn {
-      padding: 1rem 2rem;
+      padding: 1.1rem 2.2rem;
       border-radius: 12px;
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s ease;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 0.7rem;
-      letter-spacing: 0.5px;
       position: relative;
       overflow: hidden;
-      min-width: 160px;
+      min-width: 180px;
+      justify-content: center;
     }
     
     .btn::before {
@@ -463,10 +399,10 @@
       left: 50%;
       width: 0;
       height: 0;
-      border-radius: 50%;
       background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
       transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
+      transition: all 0.6s ease;
     }
     
     .btn:hover::before {
@@ -474,19 +410,9 @@
       height: 300px;
     }
     
-    .btn span {
+    .btn span, .btn i {
       position: relative;
       z-index: 1;
-    }
-    
-    .btn i {
-      position: relative;
-      z-index: 1;
-      transition: transform 0.3s ease;
-    }
-    
-    .btn:hover i {
-      transform: translateX(4px);
     }
     
     .btn-primary {
@@ -502,18 +428,16 @@
     
     .btn-secondary {
       background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
       color: var(--white);
       border: 2px solid rgba(255, 255, 255, 0.4);
     }
     
     .btn-secondary:hover {
       background: rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 255, 255, 0.6);
       transform: translateY(-3px);
     }
     
-    /* Listes élégantes - BLEU */
+    /* Listes */
     ul {
       padding-left: 0;
       margin: 1.5rem 0;
@@ -548,15 +472,10 @@
       color: var(--primary);
     }
     
-    li:hover::before {
-      transform: rotate(45deg) scale(1.2);
-      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-    }
-    
-    /* Grille de projets moderne - BLANC ET BLEU */
+    /* Grille de projets */
     .projects-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 2rem;
       margin-top: 3rem;
     }
@@ -565,49 +484,24 @@
       background: var(--white);
       border-radius: 16px;
       overflow: hidden;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      height: 100%;
+      transition: all 0.5s ease;
+      box-shadow: 0 4px 20px rgba(26, 82, 118, 0.08);
+      cursor: pointer;
       display: flex;
       flex-direction: column;
-      position: relative;
-      box-shadow: 
-        0 4px 20px rgba(26, 82, 118, 0.08),
-        0 0 0 1px var(--light-gray);
-      cursor: pointer;
     }
     
     .project:hover {
       transform: translateY(-12px);
-      box-shadow: 
-        0 20px 50px rgba(26, 82, 118, 0.15),
-        0 0 0 2px var(--accent);
-    }
-    
-    .project::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--gradient-blue);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.5s ease;
-      z-index: 10;
-    }
-    
-    .project:hover::before {
-      transform: scaleX(1);
+      box-shadow: 0 20px 50px rgba(26, 82, 118, 0.15);
     }
     
     .project-image {
       width: 100%;
-      height: 200px;
+      height: 220px;
       object-fit: cover;
       background-color: var(--off-white);
       transition: transform 0.6s ease;
-      border-bottom: 1px solid var(--light-gray);
     }
     
     .project:hover .project-image {
@@ -615,7 +509,7 @@
     }
     
     .project-content {
-      padding: 1.5rem;
+      padding: 1.8rem;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
@@ -624,20 +518,17 @@
     .project h3 {
       font-family: 'Playfair Display', serif;
       color: var(--primary);
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       margin-bottom: 1rem;
       display: flex;
       align-items: center;
       gap: 0.7rem;
       font-weight: 700;
-      letter-spacing: -0.5px;
-      line-height: 1.3;
     }
     
     .project h3 i {
       color: var(--accent);
-      font-size: 1.2rem;
-      flex-shrink: 0;
+      font-size: 1.3rem;
     }
     
     .project p {
@@ -645,36 +536,30 @@
       color: var(--text-gray);
       line-height: 1.7;
       margin-bottom: 1.5rem;
-      font-size: 0.95rem;
+      font-size: 1rem;
     }
     
     .project-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.7rem;
     }
     
     .tag {
       background: rgba(26, 82, 118, 0.05);
       color: var(--primary);
-      padding: 0.4rem 1rem;
+      padding: 0.5rem 1.1rem;
       border-radius: 6px;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 600;
       border: 1px solid rgba(26, 82, 118, 0.15);
       transition: all 0.3s ease;
-      letter-spacing: 0.5px;
     }
     
     .tag:hover {
       background: var(--gradient-blue);
       color: var(--white);
-      border-color: transparent;
       transform: translateY(-2px);
-    }
-    
-    .project-bg {
-      display: none;
     }
     
     .more-projects {
@@ -686,37 +571,31 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.8rem;
+      gap: 1rem;
       padding: 1.5rem;
       background: rgba(26, 82, 118, 0.03);
       border-radius: 12px;
       border: 2px dashed rgba(52, 152, 219, 0.3);
     }
     
-    /* Section Contact moderne - BLEU ET BLANC */
+    /* Contact */
     #contact {
       text-align: center;
-      padding: 3rem 2rem;
+      padding: 4rem 3rem;
     }
     
     .contact-container {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      margin-top: 3rem;
       max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 3rem auto 0;
     }
     
     .contact-info {
       background: rgba(26, 82, 118, 0.03);
-      padding: 2.5rem;
+      padding: 3rem;
       border-radius: 16px;
       border: 2px solid var(--very-light-blue);
       text-align: left;
       position: relative;
-      overflow: hidden;
     }
     
     .contact-info::before {
@@ -736,34 +615,22 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 700;
-      flex-wrap: wrap;
-    }
-    
-    .contact-info h3 i {
-      color: var(--accent);
     }
     
     .contact-info p {
       margin: 1.5rem 0;
-      font-size: 1rem;
+      font-size: 1.05rem;
       display: flex;
       align-items: flex-start;
       gap: 1rem;
-      transition: all 0.3s ease;
-      padding: 0.5rem 0;
       color: var(--text-gray);
-      word-break: break-word;
-    }
-    
-    .contact-info p:hover {
-      padding-left: 1rem;
     }
     
     .contact-info p i {
       color: var(--accent);
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       width: 24px;
       flex-shrink: 0;
       margin-top: 0.2rem;
@@ -774,74 +641,33 @@
       text-decoration: none;
       transition: all 0.3s;
       font-weight: 500;
-      position: relative;
       word-break: break-word;
-    }
-    
-    .contact-info a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: width 0.3s ease;
     }
     
     .contact-info a:hover {
       color: var(--accent);
     }
     
-    .contact-info a:hover::after {
-      width: 100%;
-    }
-    
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 1rem;
-      margin-top: 2rem;
+      gap: 1.2rem;
+      margin-top: 2.5rem;
       flex-wrap: wrap;
     }
     
     .social-icons a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 56px;
-      height: 56px;
+      width: 60px;
+      height: 60px;
       background: var(--gradient-blue);
       color: var(--white);
       border-radius: 14px;
-      font-size: 1.4rem;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease;
       box-shadow: 0 8px 20px rgba(26, 82, 118, 0.2);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .social-icons a::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: var(--gradient-light);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: all 0.5s ease;
-    }
-    
-    .social-icons a:hover::before {
-      width: 200px;
-      height: 200px;
-    }
-    
-    .social-icons a i {
-      position: relative;
-      z-index: 1;
     }
     
     .social-icons a:hover {
@@ -849,14 +675,59 @@
       box-shadow: 0 15px 35px rgba(52, 152, 219, 0.3);
     }
     
-    /* Notification moderne - BLEU */
+    /* Footer */
+    footer {
+      background: var(--gradient-blue);
+      color: var(--white);
+      text-align: center;
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+    }
+    
+    footer p {
+      opacity: 0.95;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    /* Bouton retour */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 55px;
+      height: 55px;
+      background: var(--gradient-blue);
+      color: var(--white);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.5s ease;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(26, 82, 118, 0.3);
+    }
+    
+    .back-to-top.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .back-to-top:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(52, 152, 219, 0.4);
+    }
+    
+    /* Notification */
     .notification {
       position: fixed;
       top: 100px;
       right: 20px;
-      left: 20px;
       max-width: 400px;
-      margin: 0 auto;
       padding: 1rem 1.5rem;
       border-radius: 12px;
       color: var(--white);
@@ -864,11 +735,9 @@
       z-index: 2000;
       opacity: 0;
       transform: translateY(-20px);
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.5s ease;
       box-shadow: 0 10px 30px rgba(26, 82, 118, 0.3);
-      backdrop-filter: blur(10px);
       text-align: center;
-      font-size: 0.9rem;
     }
     
     .notification.show {
@@ -880,87 +749,22 @@
       background: var(--gradient-blue);
     }
     
-    .notification.error {
-      background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
-    }
+    /* ========== RESPONSIVE MOBILE ========== */
     
-    /* Footer élégant - BLEU */
-    footer {
-      background: var(--gradient-blue);
-      color: var(--white);
-      text-align: center;
-      padding: 2.5rem 2rem;
-      margin-top: 4rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    footer p {
-      opacity: 0.95;
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-    
-    /* Bouton retour en haut stylisé - BLEU */
-    .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 20px;
-      width: 50px;
-      height: 50px;
-      background: var(--gradient-blue);
-      color: var(--white);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(30px) rotate(0deg);
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 1000;
-      box-shadow: 0 10px 30px rgba(26, 82, 118, 0.3);
-    }
-    
-    .back-to-top.show {
-      opacity: 1;
-      transform: translateY(0) rotate(0deg);
-    }
-    
-    .back-to-top:hover {
-      transform: translateY(-5px) rotate(360deg);
-      box-shadow: 0 15px 40px rgba(52, 152, 219, 0.4);
-    }
-    
-    /* Style pour la vidéo dans les projets */
-    .project video.project-image {
-      object-fit: cover;
-    }
-    
-    /* Responsive Design - MOBILE FIRST APPROACH */
-    
-    /* Tablettes et petits écrans */
+    /* Tablettes */
     @media (max-width: 1024px) {
       section {
-        padding: 2.5rem 1.5rem;
-        margin: 2rem 1rem;
+        padding: 3rem 2rem;
+        margin: 2rem 1.5rem;
       }
       
       section h2 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
       
       .projects-container {
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 1.5rem;
-      }
-      
-      #accueil h2 {
-        font-size: 3rem;
-      }
-      
-      #accueil p {
-        font-size: 1.2rem;
+        gap: 1.8rem;
       }
     }
     
@@ -971,74 +775,49 @@
       }
       
       header {
-        padding: 0.7rem 1rem;
+        padding: 0.9rem 1.2rem;
       }
       
-      .header-left {
-        max-width: 55%;
-      }
-      
-      header h1 {
-        font-size: 1rem;
-      }
-      
-      header h3 {
-        font-size: 0.65rem;
-        letter-spacing: 1px;
+      .header-container {
+        padding: 0;
       }
       
       .logo-accent {
-        width: 36px;
-        height: 36px;
-        font-size: 1.2rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
       }
       
-      section {
-        padding: 2.5rem 1.5rem;
-        margin: 1.5rem 1rem;
-        border-radius: 16px;
-      }
-      
-      section h2 {
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
-        gap: 0.6rem;
-      }
-      
-      section h2 i {
-        font-size: 1.5rem;
-      }
-      
-      #accueil {
-        padding: 5rem 1.5rem;
-        min-height: 80vh;
-      }
-      
-      #accueil h2 {
-        font-size: 2.5rem;
-        letter-spacing: -1px;
-      }
-      
-      #accueil p {
+      header h1 {
         font-size: 1.1rem;
       }
       
-      .hero-badge {
-        font-size: 0.75rem;
-        padding: 0.4rem 1.2rem;
-        letter-spacing: 1.5px;
+      header h3 {
+        font-size: 0.7rem;
       }
       
-      .hero-btns {
-        gap: 1rem;
-        width: 100%;
+      section {
+        padding: 2.5rem 1.8rem;
+        margin: 1.8rem 1rem;
+        border-radius: 18px;
       }
       
-      .btn {
-        padding: 0.9rem 1.5rem;
-        font-size: 0.9rem;
-        width: 100%;
-        max-width: 280px;
+      section h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+      
+      #accueil {
+        padding: 5rem 2rem;
+        min-height: 85vh;
+      }
+      
+      #accueil h2 {
+        font-size: 3rem;
+      }
+      
+      #accueil p {
+        font-size: 1.2rem;
       }
       
       .projects-container {
@@ -1049,62 +828,57 @@
       .project-image {
         height: 200px;
       }
-      
-      .project-content {
-        padding: 1.3rem;
+    }
+    
+    /* Smartphones portrait - CORRECTIONS COMPLÈTES */
+    @media (max-width: 600px) {
+      /* En-tête mobile */
+      header {
+        padding: 0.8rem 1rem;
       }
       
-      .project h3 {
-        font-size: 1.2rem;
-      }
-      
-      li {
-        font-size: 1rem;
-        padding-left: 2rem;
-      }
-      
-      .contact-info {
-        padding: 2rem 1.5rem;
-      }
-      
-      .contact-info h3 {
-        font-size: 1.4rem;
-      }
-      
-      .contact-info p {
-        font-size: 0.95rem;
-      }
-      
-      .social-icons {
+      .header-container {
         gap: 0.8rem;
       }
       
-      .social-icons a {
-        width: 52px;
-        height: 52px;
-        font-size: 1.3rem;
+      .header-left {
+        gap: 0.7rem;
+        max-width: 65%;
       }
       
-      footer {
-        padding: 2rem 1.5rem;
+      .logo-accent {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+        border-radius: 10px;
       }
-    }
-    
-    /* Smartphones portrait */
-    @media (max-width: 600px) {
+      
+      header h1 {
+        font-size: 0.95rem;
+        line-height: 1.3;
+      }
+      
+      header h3 {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+      }
+      
+      /* Navigation mobile */
       nav ul {
         display: none;
-        flex-direction: column;
         position: absolute;
-        top: 100%;
+        top: calc(100% + 10px);
         left: 0;
         right: 0;
         background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(20px);
         padding: 1rem;
-        border-top: 2px solid var(--very-light-blue);
-        box-shadow: 0 10px 30px rgba(26, 82, 118, 0.15);
+        border-radius: 12px;
+        flex-direction: column;
         gap: 0.5rem;
+        box-shadow: 0 10px 30px rgba(26, 82, 118, 0.15);
+        border: 2px solid var(--very-light-blue);
+        z-index: 100;
       }
       
       nav ul.active {
@@ -1112,11 +886,11 @@
       }
       
       nav a {
-        padding: 0.9rem 1rem;
-        border-radius: 8px;
-        font-size: 0.9rem;
+        padding: 1rem;
+        font-size: 0.95rem;
         width: 100%;
         text-align: left;
+        border-radius: 10px;
       }
       
       nav a::before {
@@ -1127,22 +901,190 @@
         display: block;
       }
       
-      header {
+      .language-toggle {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+        gap: 0.4rem;
+      }
+      
+      /* Hero section mobile */
+      #accueil {
+        padding: 4rem 1.5rem;
+        min-height: 75vh;
+      }
+      
+      #accueil h2 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        margin-bottom: 1.2rem;
+      }
+      
+      #accueil p {
+        font-size: 1.05rem;
+        margin-bottom: 2rem;
+      }
+      
+      .hero-badge {
+        font-size: 0.75rem;
+        padding: 0.5rem 1.2rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .hero-btns {
+        width: 100%;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        padding: 1rem 1.8rem;
+        font-size: 0.95rem;
+      }
+      
+      /* Sections mobiles */
+      section {
+        padding: 2rem 1.2rem;
+        margin: 1.5rem 0.8rem;
+        border-radius: 16px;
+      }
+      
+      section h2 {
+        font-size: 1.7rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+        margin-bottom: 1.8rem;
+      }
+      
+      section h2 i {
+        font-size: 1.6rem;
+      }
+      
+      /* Listes mobiles */
+      li {
+        font-size: 0.95rem;
+        padding-left: 2rem;
+        margin-bottom: 1rem;
+      }
+      
+      li::before {
+        width: 10px;
+        height: 10px;
+        top: 0.5rem;
+      }
+      
+      li:hover {
+        padding-left: 2.3rem;
+      }
+      
+      /* Projets mobiles */
+      .projects-container {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+      }
+      
+      .project {
+        margin: 0;
+      }
+      
+      .project:hover {
+        transform: translateY(-5px);
+      }
+      
+      .project-image {
+        height: 200px;
+      }
+      
+      .project-content {
+        padding: 1.5rem;
+      }
+      
+      .project h3 {
+        font-size: 1.25rem;
         flex-wrap: wrap;
-        padding: 0.8rem 1rem;
       }
       
+      .project p {
+        font-size: 0.95rem;
+      }
+      
+      .tag {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.9rem;
+      }
+      
+      /* Contact mobile */
+      .contact-info {
+        padding: 2rem 1.5rem;
+      }
+      
+      .contact-info h3 {
+        font-size: 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+      }
+      
+      .contact-info p {
+        font-size: 0.95rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      
+      .social-icons {
+        gap: 1rem;
+      }
+      
+      .social-icons a {
+        width: 52px;
+        height: 52px;
+        font-size: 1.3rem;
+      }
+      
+      /* Footer mobile */
+      footer {
+        padding: 2.5rem 1.5rem;
+      }
+      
+      footer p {
+        font-size: 0.9rem;
+      }
+      
+      /* Bouton retour mobile */
+      .back-to-top {
+        width: 48px;
+        height: 48px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 1.2rem;
+      }
+      
+      /* Notification mobile */
+      .notification {
+        left: 15px;
+        right: 15px;
+        max-width: calc(100% - 30px);
+        font-size: 0.85rem;
+      }
+    }
+    
+    /* Très petits smartphones */
+    @media (max-width: 400px) {
       .header-left {
-        gap: 0.6rem;
-        max-width: 50%;
+        max-width: 60%;
       }
       
-      .header-right {
-        gap: 0.6rem;
+      .logo-accent {
+        width: 32px;
+        height: 32px;
+        font-size: 1.1rem;
       }
       
       header h1 {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
       }
       
       header h3 {
@@ -1151,694 +1093,135 @@
       
       .language-toggle {
         font-size: 0.7rem;
-        padding: 0.35rem 0.65rem;
-      }
-      
-      .logo-accent {
-        width: 34px;
-        height: 34px;
-        font-size: 1.1rem;
+        padding: 0.35rem 0.7rem;
       }
       
       #accueil {
-        padding: 4rem 1.2rem;
-        min-height: 75vh;
+        padding: 3.5rem 1.2rem;
       }
       
       #accueil h2 {
-        font-size: 2.2rem;
+        font-size: 1.9rem;
       }
       
       #accueil p {
-        font-size: 1.05rem;
+        font-size: 1rem;
       }
       
       section {
-        padding: 2rem 1.2rem;
-        margin: 1.5rem 0.8rem;
+        padding: 1.8rem 1rem;
+        margin: 1.2rem 0.5rem;
       }
       
       section h2 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
       }
       
       .project-image {
         height: 180px;
       }
       
-      .notification {
-        left: 10px;
-        right: 10px;
-        font-size: 0.85rem;
-      }
-      
-      .back-to-top {
-        width: 46px;
-        height: 46px;
-        font-size: 1.2rem;
-        bottom: 20px;
-        right: 15px;
-      }
-    }
-    
-    /* Très petits smartphones */
-    @media (max-width: 480px) {
-      body {
-        font-size: 14px;
-      }
-      
-      .header-left {
-        gap: 0.5rem;
-        max-width: 45%;
-      }
-      
-      header h1 {
-        font-size: 0.85rem;
-      }
-      
-      header h3 {
-        font-size: 0.55rem;
-        letter-spacing: 0.8px;
-      }
-      
-      .logo-accent {
-        width: 32px;
-        height: 32px;
-        font-size: 1rem;
-        border-radius: 8px;
-      }
-      
-      .language-toggle {
-        font-size: 0.65rem;
-        padding: 0.3rem 0.6rem;
-      }
-      
-      #accueil {
-        padding: 3.5rem 1rem;
-        min-height: 70vh;
-      }
-      
-      #accueil h2 {
-        font-size: 1.8rem;
-      }
-      
-      #accueil p {
-        font-size: 1rem;
-      }
-      
-      .hero-badge {
-        font-size: 0.7rem;
-        padding: 0.35rem 1rem;
-        letter-spacing: 1.2px;
-      }
-      
-      .btn {
-        padding: 0.8rem 1.2rem;
-        font-size: 0.85rem;
-        min-width: 140px;
-      }
-      
-      section {
-        padding: 1.8rem 1rem;
-        margin: 1.2rem 0.5rem;
-        border-radius: 12px;
-      }
-      
-      section h2 {
-        font-size: 1.5rem;
-        margin-bottom: 1.2rem;
-      }
-      
-      section h2 i {
-        font-size: 1.3rem;
-      }
-      
-      .project-content {
-        padding: 1.2rem;
-      }
-      
-      .project h3 {
-        font-size: 1.1rem;
-      }
-      
-      .project p {
-        font-size: 0.9rem;
-      }
-      
-      .project-image {
-        height: 160px;
-      }
-      
-      .tag {
-        font-size: 0.75rem;
-        padding: 0.35rem 0.8rem;
-      }
-      
-      li {
-        font-size: 0.95rem;
-        padding-left: 1.8rem;
-        margin-bottom: 1rem;
-      }
-      
       .contact-info {
-        padding: 1.5rem 1rem;
-      }
-      
-      .contact-info h3 {
-        font-size: 1.3rem;
-      }
-      
-      .contact-info p {
-        font-size: 0.9rem;
-        gap: 0.8rem;
+        padding: 1.5rem 1.2rem;
       }
       
       .social-icons a {
         width: 48px;
         height: 48px;
-        font-size: 1.2rem;
-      }
-      
-      .more-projects {
-        font-size: 1rem;
-        padding: 1.2rem;
-      }
-      
-      footer {
-        padding: 1.8rem 1rem;
-      }
-      
-      footer p {
-        font-size: 0.85rem;
       }
     }
     
-    /* Très petits écrans (< 360px) */
-    @media (max-width: 360px) {
-      header h1 {
-        font-size: 0.8rem;
-      }
-      
-      header h3 {
-        display: none;
-      }
-      
-      #accueil h2 {
-        font-size: 1.6rem;
-      }
-      
-      #accueil p {
-        font-size: 0.95rem;
-      }
-      
-      section h2 {
-        font-size: 1.4rem;
-      }
-    }
-
-    /* ========== CORRECTIONS RESPONSIVE MOBILE ========== */
-
-/* Smartphones portrait - Correction complète */
-@media (max-width: 600px) {
-  /* En-tête - Correction du débordement */
-  .header-container {
-    padding: 0 10px;
-    gap: 10px;
-  }
-  
-  .header-left {
-    min-width: 0;
-    max-width: 70%;
-  }
-  
-  header h1 {
-    font-size: 0.9rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-    line-height: 1.2;
-  }
-  
-  header h3 {
-    font-size: 0.6rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-  }
-  
-  .logo-accent {
-    min-width: 34px;
-    min-height: 34px;
-    flex-shrink: 0;
-  }
-  
-  .language-toggle {
-    padding: 8px 10px;
-    font-size: 0.7rem;
-    min-width: auto;
-  }
-  
-  /* Menu mobile amélioré */
-  nav {
-    top: 70px;
-    padding: 15px;
-    max-height: calc(100vh - 70px);
-    overflow-y: auto;
-  }
-  
-  nav ul {
-    gap: 5px;
-  }
-  
-  nav a {
-    padding: 12px 15px;
-    font-size: 1rem;
-    border-radius: 10px;
-    margin-bottom: 5px;
-  }
-  
-  /* Section hero améliorée */
-  #accueil {
-    padding: 3rem 1rem;
-    min-height: 70vh;
-  }
-  
-  #accueil h2 {
-    font-size: 1.8rem;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-    word-break: break-word;
-  }
-  
-  #accueil p {
-    font-size: 1rem;
-    line-height: 1.5;
-    padding: 0 10px;
-  }
-  
-  .hero-badge {
-    font-size: 0.75rem;
-    padding: 8px 15px;
-    margin-bottom: 1.5rem;
-  }
-  
-  .hero-btns {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .btn {
-    width: 100%;
-    max-width: 280px;
-    padding: 14px 20px;
-    font-size: 1rem;
-  }
-  
-  /* Sections générales */
-  section {
-    padding: 2rem 1rem;
-    margin: 1.5rem 0.8rem;
-    border-radius: 16px;
-  }
-  
-  section h2 {
-    font-size: 1.5rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  
-  section h2 i {
-    font-size: 1.4rem;
-  }
-  
-  /* Correction des listes */
-  li {
-    padding-left: 2rem;
-    margin-bottom: 1rem;
-    line-height: 1.5;
-    font-size: 1rem;
-  }
-  
-  li::before {
-    top: 0.5rem;
-    width: 10px;
-    height: 10px;
-  }
-  
-  li:hover {
-    padding-left: 2.2rem;
-  }
-  
-  /* Grille de projets - CORRECTION IMPORTANTE */
-  .projects-container {
-    grid-template-columns: 1fr !important;
-    gap: 1.5rem;
-  }
-  
-  .project {
-    width: 100%;
-    margin: 0 auto;
-    max-width: 100%;
-  }
-  
-  .project:hover {
-    transform: translateY(-5px);
-  }
-  
-  .project-image {
-    height: 180px;
-    font-size: 2.5rem;
-  }
-  
-  .project h3 {
-    font-size: 1.2rem;
-    flex-wrap: wrap;
-    line-height: 1.3;
-  }
-  
-  .project p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-  
-  .project-tags {
-    gap: 5px;
-  }
-  
-  .tag {
-    padding: 6px 12px;
-    font-size: 0.8rem;
-  }
-  
-  .more-projects {
-    padding: 1rem;
-    font-size: 1rem;
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-  }
-  
-  /* Section contact améliorée */
-  #contact {
-    padding: 2rem 1rem;
-  }
-  
-  .contact-container {
-    width: 100%;
-    padding: 0;
-  }
-  
-  .contact-info {
-    padding: 1.5rem;
-  }
-  
-  .contact-info h3 {
-    font-size: 1.3rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  
-  .contact-info p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    word-break: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  .contact-info a {
-    word-break: break-all;
-  }
-  
-  .social-icons {
-    gap: 10px;
-  }
-  
-  .social-icons a {
-    width: 50px;
-    height: 50px;
-    font-size: 1.2rem;
-  }
-  
-  /* Footer */
-  footer {
-    padding: 2rem 1rem;
-    font-size: 0.9rem;
-  }
-  
-  footer p {
-    line-height: 1.5;
-  }
-  
-  /* Bouton retour en haut */
-  .back-to-top {
-    width: 45px;
-    height: 45px;
-    bottom: 20px;
-    right: 15px;
-    font-size: 1.1rem;
-  }
-  
-  /* Notification */
-  .notification {
-    left: 10px;
-    right: 10px;
-    max-width: calc(100% - 20px);
-    font-size: 0.85rem;
-  }
-}
-
-/* Très petits smartphones (moins de 400px) */
-@media (max-width: 400px) {
-  .header-left {
-    max-width: 60%;
-  }
-  
-  header h1 {
-    font-size: 0.8rem;
-  }
-  
-  .logo-accent {
-    width: 30px;
-    height: 30px;
-    font-size: 0.9rem;
-  }
-  
-  #accueil h2 {
-    font-size: 1.6rem;
-  }
-  
-  #accueil p {
-    font-size: 0.95rem;
-  }
-  
-  section {
-    padding: 1.5rem 0.8rem;
-    margin: 1rem 0.5rem;
-  }
-  
-  section h2 {
-    font-size: 1.3rem;
-  }
-  
-  .project-image {
-    height: 150px;
-  }
-  
-  .contact-info {
-    padding: 1.2rem;
-  }
-  
-  .social-icons a {
-    width: 45px;
-    height: 45px;
-  }
-}
-
-/* Correction pour orientation paysage mobile */
-@media (max-height: 500px) and (max-width: 900px) {
-  #accueil {
-    min-height: 90vh;
-  }
-  
-  nav {
-    max-height: 300px;
-  }
-}
-
-/* Optimisation pour le tactile */
-@media (hover: none) and (pointer: coarse) {
-  /* Taille minimale des zones cliquables */
-  nav a, 
-  .btn, 
-  .language-toggle, 
-  .mobile-menu-btn, 
-  .social-icons a,
-  .back-to-top,
-  .tag {
-    min-height: 44px;
-    min-width: 44px;
-  }
-  
-  .mobile-menu-btn {
-    padding: 10px;
-  }
-  
-  /* Désactiver les effets hover sur mobile */
-  .project:hover {
-    transform: none;
-  }
-  
-  li:hover {
-    padding-left: 2rem;
-  }
-  
-  .btn:hover::before {
-    width: 0;
-    height: 0;
-  }
-  
-  .social-icons a:hover {
-    transform: none;
-  }
-}
-
-/* Correction de débordement de texte */
-* {
-  -webkit-hyphens: auto;
-  hyphens: auto;
-  word-wrap: break-word;
-}
-
-/* Amélioration du scroll sur mobile */
-html {
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Prévenir le zoom sur les champs de formulaire sur iOS */
-@media screen and (max-width: 768px) {
-  input, select, textarea {
-    font-size: 16px !important;
-  }
-}
-
-/* Correction pour les appareils avec notch */
-@supports(padding: max(0px)) {
-  header, section {
-    padding-left: max(1rem, env(safe-area-inset-left));
-    padding-right: max(1rem, env(safe-area-inset-right));
-  }
-  
-  footer {
-    padding-bottom: max(2rem, env(safe-area-inset-bottom));
-  }
-}
-    
-    /* Landscape orientation on mobile */
+    /* Orientation paysage mobile */
     @media (max-height: 500px) and (orientation: landscape) {
       #accueil {
         min-height: 100vh;
-        padding: 3rem 1.5rem;
+        padding: 3rem 2rem;
       }
       
       #accueil h2 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
+        font-size: 2.5rem;
       }
       
       #accueil p {
-        font-size: 1rem;
+        font-size: 1.1rem;
         margin-bottom: 1.5rem;
-      }
-      
-      .hero-badge {
-        margin-bottom: 1rem;
-      }
-      
-      .hero-btns {
-        margin-top: 1rem;
-      }
-      
-      section {
-        padding: 2rem 1.5rem;
       }
     }
     
-    /* Touch-friendly adjustments */
+    /* Optimisation tactile */
     @media (hover: none) and (pointer: coarse) {
-      .btn {
-        min-height: 48px;
-      }
-      
-      nav a {
+      .btn,
+      nav a,
+      .language-toggle,
+      .mobile-menu-btn,
+      .social-icons a,
+      .back-to-top {
         min-height: 44px;
-      }
-      
-      .social-icons a {
-        min-width: 48px;
-        min-height: 48px;
-      }
-      
-      .language-toggle {
-        min-height: 40px;
-      }
-      
-      .mobile-menu-btn {
         min-width: 44px;
-        min-height: 44px;
+      }
+      
+      .project:hover {
+        transform: none;
+      }
+      
+      li:hover {
+        padding-left: 2rem;
       }
     }
     
     /* Smooth scroll */
     html {
       scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
     }
     
-    /* Prevent text size adjustment on orientation change */
-    html {
-      -webkit-text-size-adjust: 100%;
-      -moz-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-      text-size-adjust: 100%;
+    /* Safe areas pour notch */
+    @supports(padding: max(0px)) {
+      header,
+      section {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+      }
+      
+      footer {
+        padding-bottom: max(2rem, env(safe-area-inset-bottom));
+      }
     }
   </style>
 </head>
 <body>
 
   <header id="mainHeader">
-    <div class="header-left">
-      <div class="logo-accent">
-        <i class="fas fa-globe-africa"></i>
+    <div class="header-container">
+      <div class="header-left">
+        <div class="logo-accent">
+          <i class="fas fa-globe-africa"></i>
+        </div>
+        <div class="header-text">
+          <h1>Thiombiano Serges Honoré</h1>
+          <h3>Spatial Tech</h3>
+        </div>
       </div>
-      <div class="header-text">
-        <h1>Thiombiano Serges Honoré</h1>
-        <h3>Spatial Tech</h3>
+      <div class="header-right">
+        <button class="mobile-menu-btn" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <nav>
+          <ul id="navMenu">
+            <li><a href="#accueil" class="active" data-en="Home" data-fr="Accueil">Home</a></li>
+            <li><a href="#formation" data-en="Education" data-fr="Formation">Education</a></li>
+            <li><a href="#a-propos" data-en="About" data-fr="À propos">About</a></li>
+            <li><a href="#competences" data-en="Skills" data-fr="Compétences">Skills</a></li>
+            <li><a href="#services" data-en="Services" data-fr="Services">Services</a></li>
+            <li><a href="#projets" data-en="Projects" data-fr="Projets">Projects</a></li>
+            <li><a href="#contact" data-en="Contact" data-fr="Contact">Contact</a></li>
+          </ul>
+        </nav>
+        <button class="language-toggle" id="langToggle">
+          <i class="fas fa-globe"></i>
+          <span>FR</span>
+        </button>
       </div>
-    </div>
-    <div class="header-right">
-      <button class="mobile-menu-btn" aria-label="Menu">
-        <i class="fas fa-bars"></i>
-      </button>
-      <nav>
-        <ul id="navMenu">
-          <li><a href="#accueil" class="active" data-en="Home" data-fr="Accueil">Home</a></li>
-          <li><a href="#formation" data-en="Education" data-fr="Formation">Education</a></li>
-          <li><a href="#a-propos" data-en="About" data-fr="À propos">About</a></li>
-          <li><a href="#competences" data-en="Skills" data-fr="Compétences">Skills</a></li>
-          <li><a href="#services" data-en="Services" data-fr="Services">Services</a></li>
-          <li><a href="#projets" data-en="Projects" data-fr="Projets">Projects</a></li>
-          <li><a href="#contact" data-en="Contact" data-fr="Contact">Contact</a></li>
-        </ul>
-      </nav>
-      <button class="language-toggle" id="langToggle">
-        <i class="fas fa-globe"></i>
-        <span>FR</span>
-      </button>
     </div>
   </header>
 
@@ -1870,8 +1253,8 @@ html {
         <li data-en="Drone Remote Pilot Certificate for subcategories A1/A3 (EASA Open Category) issued by the French DGAC" data-fr="Attestation de Télépilote de Drone pour les sous-catégories A1/A3 (Catégorie Ouverte EASA) délivrée par la DGAC Française">Drone Remote Pilot Certificate for subcategories A1/A3 (EASA Open Category) issued by the French DGAC</li>
         <li data-en="Digital Earth Africa Certification in Sandbox Usage (Python), Urbanization, and Water Cycle" data-fr="Certification de Digital earth Africa en usage de sandbox(python), urbanisation, et cycle hydrique">Digital Earth Africa Certification in Sandbox Usage (Python), Urbanization, and Water Cycle</li>
         <li data-en="Eetroov Certification: Geodata and Parcel Polygons - Agricultural Area Mapping with QGIS" data-fr="Certification de Eetroov GÉODONNÉES ET POLYGONES DES PARCELLES CARTOGRAPHIE ZONE D'EXPLOITATION AGRICOLE AVEC QGIS">Eetroov Certification: Geodata and Parcel Polygons - Agricultural Area Mapping with QGIS</li>
-        <li data-en="UNITAR Certification in Climate Change Negotiations " data-fr="Certification de UNITAR en Négociations sur le changement climatique">UNITAR Certification in Climate Change Negotiations</li>
-        <li data-en="Certificate of Completion in Solution Creation Entrepreneurship Training  by Nestlé YEP Academy" data-fr="Certificat d'achèvement en formation à l'entrepreneuriat en création de solutions par Nestlé YEP Academy">Certificate of Completion in Solution Creation Entrepreneurship Training  by Nestlé YEP Academy</li>
+        <li data-en="UNITAR Certification in Climate Change Negotiations" data-fr="Certification de UNITAR en Négociations sur le changement climatique">UNITAR Certification in Climate Change Negotiations</li>
+        <li data-en="Certificate of Completion in Solution Creation Entrepreneurship Training by Nestlé YEP Academy" data-fr="Certificat d'achèvement en formation à l'entrepreneuriat en création de solutions par Nestlé YEP Academy">Certificate of Completion in Solution Creation Entrepreneurship Training by Nestlé YEP Academy</li>
       </ul>
     </section>
     
@@ -1939,7 +1322,7 @@ html {
         </div>
         
         <div class="project">
-          <img src="./images/carte pluviometrique.PNG" class="project-image">
+          <img src="./images/carte pluviometrique.PNG" class="project-image" alt="Données climatiques">
           <div class="project-content">
             <h3><i class="fas fa-cloud-sun-rain"></i> <span data-en="GLDAS Climate Data" data-fr="Données climatiques GLDAS">GLDAS Climate Data</span></h3>
             <p data-en="Extraction and processing of GLDAS spatialized climate data to calculate rainfall accumulations in the provinces of Burkina Faso." data-fr="Extraction et traitement de données climatiques spatialisées GLDAS pour calculer les cumuls pluviométriques sur les provinces du Burkina Faso.">Extraction and processing of GLDAS spatialized climate data to calculate rainfall accumulations in the provinces of Burkina Faso.</p>
@@ -1978,7 +1361,7 @@ html {
         </div>
         
         <div class="project">
-          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Site web" class="project-image">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&h=400&q=80" alt="Site web" class="project-image">
           <div class="project-content">
             <h3><i class="fas fa-laptop-code"></i> <span data-en="Showcase Website" data-fr="Site web vitrine">Showcase Website</span></h3>
             <p data-en="Development of a showcase website for BCEF Engineering and IT using HTML, CSS, and JavaScript." data-fr="Mise en place d'un site vitrine pour BCEF ingenierie et informatique avec HTML, CSS et JavaScript.">Development of a showcase website for BCEF Engineering and IT using HTML, CSS, and JavaScript.</p>
@@ -2020,7 +1403,7 @@ html {
           <img src="./images/Capture d'écran 2025-12-30 120003.png" alt="F-DAM" class="project-image">
           <div class="project-content">
             <h3><i class="fas fa-water"></i> F-DAM</h3>
-            <p data-en="Flood Damage Assessment and Monitoring." data-fr="Flood Damage Assessment and Monitoring.">Flood Damage Assessment and Monitoring.</p>
+            <p data-en="Flood Damage Assessment and Monitoring." data-fr="Évaluation et suivi des dommages causés par les inondations.">Flood Damage Assessment and Monitoring.</p>
             <div class="project-tags">
               <span class="tag">Web</span>
               <span class="tag">HTML/CSS</span>
@@ -2056,9 +1439,9 @@ html {
         </div>
 
         <div class="project">
-          <video autoplay muted loop controls class="project-image" poster="./images/WhatsApp Image 2026-01-28 at 15.42.05 (1).jpeg">
+          <video autoplay muted loop playsinline class="project-image" poster="./images/WhatsApp Image 2026-01-28 at 15.42.05 (1).jpeg">
             <source src="./images/Poster_competition.mp4" type="video/mp4">
-            Your browser does not support video playback.
+            Votre navigateur ne supporte pas la lecture de vidéos.
           </video>
           <div class="project-content">
             <h3><i class="fas fa-video"></i> <span data-en="DIWASA Video Presentation" data-fr="Présentation vidéo DIWASA">DIWASA Video Presentation</span></h3>
@@ -2123,7 +1506,6 @@ html {
     
     function switchLanguage() {
       currentLang = currentLang === 'en' ? 'fr' : 'en';
-      
       langToggle.querySelector('span').textContent = currentLang === 'en' ? 'FR' : 'EN';
       document.documentElement.lang = currentLang;
       
@@ -2131,7 +1513,6 @@ html {
         element.textContent = element.getAttribute(`data-${currentLang}`);
       });
       
-      // Notification de changement de langue
       showNotification(
         currentLang === 'en' 
           ? 'Language switched to English' 
@@ -2140,11 +1521,8 @@ html {
       );
     }
     
-    // Initialiser la langue au chargement
     document.addEventListener('DOMContentLoaded', () => {
       document.documentElement.lang = currentLang;
-      
-      // Initialiser les textes
       document.querySelectorAll('[data-en][data-fr]').forEach(element => {
         element.textContent = element.getAttribute(`data-${currentLang}`);
       });
@@ -2152,20 +1530,14 @@ html {
     
     langToggle.addEventListener('click', switchLanguage);
     
-    // Header scroll effect
+    // Header scroll
     const header = document.getElementById('mainHeader');
-    let lastScroll = 0;
-    
     window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-      
-      if (currentScroll > 100) {
+      if (window.pageYOffset > 100) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
       }
-      
-      lastScroll = currentScroll;
     });
     
     // Menu mobile
@@ -2186,7 +1558,6 @@ html {
       });
     });
     
-    // Fermer le menu en cliquant à l'extérieur
     document.addEventListener('click', (e) => {
       if (!e.target.closest('nav') && !e.target.closest('.mobile-menu-btn') && navMenu.classList.contains('active')) {
         navMenu.classList.remove('active');
@@ -2194,15 +1565,13 @@ html {
       }
     });
     
-    // Mise à jour du lien actif lors du défilement
+    // Navigation active
     function updateActiveNavLink() {
       let current = '';
       const sections = document.querySelectorAll('section');
       
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
         if (pageYOffset >= sectionTop - 150) {
           current = section.getAttribute('id');
         }
@@ -2218,48 +1587,38 @@ html {
     
     window.addEventListener('scroll', updateActiveNavLink);
     
-    // Smooth scrolling avec mise à jour du lien actif
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-          const offsetTop = target.offsetTop - 80;
           window.scrollTo({
-            top: offsetTop,
+            top: target.offsetTop - 80,
             behavior: 'smooth'
           });
-          
-          // Mettre à jour les liens actifs
           setTimeout(updateActiveNavLink, 300);
         }
       });
     });
     
-    // Animation des sections
+    // Animation sections
     const sections = document.querySelectorAll('section');
-    
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -100px 0px'
-    };
-    
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
         }
       });
-    }, observerOptions);
-    
-    sections.forEach(section => {
-      observer.observe(section);
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
     });
     
-    // Bouton retour en haut
-    const backToTop = document.getElementById('backToTop');
+    sections.forEach(section => observer.observe(section));
     
+    // Bouton retour
+    const backToTop = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
       if (window.pageYOffset > 400) {
         backToTop.classList.add('show');
@@ -2269,93 +1628,19 @@ html {
     });
     
     backToTop.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
     
-    // Animation des projets
-    const projects = document.querySelectorAll('.project');
-    
-    projects.forEach((project, index) => {
-      project.style.animationDelay = `${index * 0.1}s`;
-    });
-    
-    // Fonction de notification
+    // Notification
     function showNotification(message, type = 'success') {
       const notification = document.getElementById('notification');
       notification.textContent = message;
       notification.className = `notification ${type}`;
       notification.classList.add('show');
-      
-      setTimeout(() => {
-        notification.classList.remove('show');
-      }, 3000);
+      setTimeout(() => notification.classList.remove('show'), 3000);
     }
     
-    // Gestion des clics sur les projets (optionnel)
-    projects.forEach(project => {
-      project.addEventListener('click', () => {
-        const title = project.querySelector('h3 span').textContent;
-        showNotification(
-          currentLang === 'en' 
-            ? `Viewing project: ${title}` 
-            : `Visualisation du projet: ${title}`,
-          'success'
-        );
-      });
-    });
-    
-    // Initialiser la navigation active au chargement
     updateActiveNavLink();
-    
-    // Optimisation des performances pour mobile
-    let ticking = false;
-    
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateActiveNavLink();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-
-    // Optimisations pour mobile
-function optimizeForMobile() {
-  if (window.innerWidth <= 600) {
-    // Désactiver certaines animations sur mobile pour les performances
-    document.body.style.animationDuration = '0.5s';
-    
-    // Ajuster la hauteur de la section hero
-    const hero = document.getElementById('accueil');
-    if (hero) {
-      hero.style.minHeight = window.innerHeight * 0.8 + 'px';
-    }
-  }
-}
-
-// Exécuter au chargement et au redimensionnement
-window.addEventListener('load', optimizeForMobile);
-window.addEventListener('resize', optimizeForMobile);
-
-// Prévenir le zoom sur les champs de formulaire iOS
-document.addEventListener('DOMContentLoaded', function() {
-  if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-    document.addEventListener('focus', function(e) {
-      if (['input', 'textarea'].includes(e.target.tagName.toLowerCase())) {
-        document.body.style.fontSize = '16px';
-      }
-    }, true);
-    
-    document.addEventListener('blur', function() {
-      document.body.style.fontSize = '';
-    }, true);
-  }
-});
-
   </script>
 </body>
 </html>
