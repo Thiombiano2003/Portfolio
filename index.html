@@ -478,6 +478,7 @@
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 2rem;
       margin-top: 3rem;
+      width: 100%;
     }
     
     .project {
@@ -489,6 +490,8 @@
       cursor: pointer;
       display: flex;
       flex-direction: column;
+      width: 100%;
+      min-height: 400px;
     }
     
     .project:hover {
@@ -502,6 +505,24 @@
       object-fit: cover;
       background-color: var(--off-white);
       transition: transform 0.6s ease;
+      display: block;
+    }
+    
+    /* Fallback si l'image ne charge pas */
+    .project-image::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--very-light-blue) 0%, var(--light-blue) 100%);
+    }
+    
+    .project-image[src*=".PNG"],
+    .project-image[src*=".png"],
+    .project-image[src*=".jpg"],
+    .project-image[src*=".jpeg"] {
+      background-image: linear-gradient(135deg, var(--very-light-blue) 0%, var(--light-blue) 100%);
+      background-size: cover;
     }
     
     .project:hover .project-image {
@@ -981,12 +1002,20 @@
       
       /* Projets mobiles */
       .projects-container {
+        display: grid !important;
         grid-template-columns: 1fr !important;
         gap: 1.5rem;
+        width: 100%;
+        margin-top: 2rem;
       }
       
       .project {
         margin: 0;
+        width: 100%;
+        display: flex !important;
+        flex-direction: column;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
       
       .project:hover {
@@ -1471,12 +1500,12 @@
           <p><i class="fas fa-user"></i> Thiombiano Serges Honoré</p>
           <p><i class="fas fa-map-marker-alt"></i> Ouagadougou, Burkina Faso</p>
           <p><i class="fas fa-phone"></i> WhatsApp: <a href="https://wa.me/22652922901">(+226) 52 92 29 01</a></p>
-          <p><i class="fas fa-envelope"></i> Email: <a href="mailto:thiombianosergeshonore@gmail.com">thiombianosergeshonore@gmail.com</a></p>
+          <p><i class="fas fa-envelope"></i> Email: <a href="/cdn-cgi/l/email-protection#691d010006040b000807061a0c1b0e0c1a010607061b0c290e04080005470a0604"><span class="__cf_email__" data-cfemail="53273b3a3c3e313a323d3c2036213436203b3c3d3c213613343e323a3f7d303c3e">[email&#160;protected]</span></a></p>
           <p><i class="fab fa-linkedin"></i> LinkedIn: <a href="https://www.linkedin.com/in/serges-honoré-thiombiano-7910302a8">Serges Honoré Thiombiano</a></p>
           
           <div class="social-icons">
             <a href="https://www.linkedin.com/in/serges-honoré-thiombiano-7910302a8" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="mailto:thiombianosergeshonore@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="/cdn-cgi/l/email-protection#a9ddc1c0c6c4cbc0c8c7c6daccdbceccdac1c6c7c6dbcce9cec4c8c0c587cac6c4" aria-label="Email"><i class="fas fa-envelope"></i></a>
             <a href="https://wa.me/22652922901" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             <a href="#" aria-label="Portfolio"><i class="fas fa-globe"></i></a>
           </div>
@@ -1498,7 +1527,7 @@
   
   <div class="notification" id="notification"></div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Système de traduction
     let currentLang = 'en';
     
@@ -1641,6 +1670,38 @@
     }
     
     updateActiveNavLink();
+    
+    // CORRECTION MOBILE: Forcer l'affichage des projets
+    document.addEventListener('DOMContentLoaded', () => {
+      const projects = document.querySelectorAll('.project');
+      const container = document.querySelector('.projects-container');
+      
+      console.log('🔍 Diagnostic projets:', {
+        nombre: projects.length,
+        largeurEcran: window.innerWidth,
+        estMobile: window.innerWidth <= 600
+      });
+      
+      // Forcer l'affichage sur mobile
+      if (window.innerWidth <= 600 && container) {
+        container.style.cssText = 'display: grid !important; grid-template-columns: 1fr !important; gap: 1.5rem; width: 100%;';
+        
+        projects.forEach((project, i) => {
+          project.style.cssText = 'display: flex !important; flex-direction: column; width: 100%; visibility: visible !important; opacity: 1 !important;';
+        });
+        
+        console.log('✅ Projets forcés en affichage mobile');
+      }
+      
+      // Vérification
+      setTimeout(() => {
+        let visibles = 0;
+        projects.forEach(p => {
+          if (p.offsetParent !== null) visibles++;
+        });
+        console.log(`✅ ${visibles}/${projects.length} projets visibles`);
+      }, 500);
+    });
   </script>
 </body>
 </html>
